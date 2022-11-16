@@ -25,10 +25,15 @@ public class MVCMainActivityController implements MVCController{
 
    public void onAddButtonClicked(String toDoItem, String place) {
        try{
-           boolean success = mvcModel.addToDoItem( toDoItem,  place);
-           if(success){
-               mvcView.updateViewonAdd(mvcModel.getAllToDos());
+           if(toDoItem.length() != 0 && place.length() != 0){
+               boolean success = mvcModel.addToDoItem( toDoItem,  place);
+               if(success){
+                   mvcView.updateViewonAdd(mvcModel.getAllToDos());
+               }
+           }else {
+               throw new Exception("情報を入力してください。");
            }
+
        }catch (Exception e){
            mvcView.showErrorToast(e.getMessage());
        }

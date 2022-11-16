@@ -60,9 +60,10 @@ public class ToDoListDBAdapter {
        return sqLliteDatabase.delete(TABLE_TODO, COLUMN_TODO_ID+" = "+taskId,null)>0;
     }
 
-    public boolean modify(long taskId, String newToDoItem){
+    public boolean modify(long taskId, String newToDoItem, String newAddress){
         ContentValues contentValues=new ContentValues();
         contentValues.put(COLUMN_TODO,newToDoItem);
+        contentValues.put(COLUMN_PLACE,newAddress);
 
        return sqLliteDatabase.update(TABLE_TODO,contentValues, COLUMN_TODO_ID+" = "+taskId,null)>0;
     }

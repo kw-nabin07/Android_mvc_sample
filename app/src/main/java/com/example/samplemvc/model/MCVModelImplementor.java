@@ -54,8 +54,8 @@ public class MCVModelImplementor implements MVCModel {
     }
 
     @Override
-    public boolean modifyToDoItem(long id, String newToDoValuel) throws Exception{
-        boolean modifySuccess = toDoListDBAdapter.modify(id,newToDoValuel);
+    public boolean modifyToDoItem(long id, String newToDoValuel,String newAddressValue) throws Exception{
+        boolean modifySuccess = toDoListDBAdapter.modify(id,newToDoValuel,newAddressValue);
         if(modifySuccess){
             refresh();
         } else{

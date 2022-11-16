@@ -31,9 +31,9 @@ public class MVCDataManipulationController implements MVCController{
 
    }
 
-   public void onModifyButtonClicked(long id, String newValue){
+   public void onModifyButtonClicked(long id, String newTODo,String newAddress){
        try{
-           boolean success = mvcModel.modifyToDoItem(id,newValue);
+           boolean success = mvcModel.modifyToDoItem(id,newTODo,newAddress);
            if(success){
                mvcView.updateViewOnModify(mvcModel.getToDo(id));
            }

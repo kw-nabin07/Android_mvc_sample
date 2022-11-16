@@ -11,5 +11,5 @@ public interface MVCModel {
     public ToDo getToDo(long id) throws Exception;
     public boolean addToDoItem(String toDoItem, String place) throws Exception;
     public boolean removeToDoItem(long id) throws Exception;
-    public boolean modifyToDoItem(long id, String newToDoValuel) throws Exception;
+    public boolean modifyToDoItem(long id, String newToDoValue, String newAddressValue) throws Exception;
 }

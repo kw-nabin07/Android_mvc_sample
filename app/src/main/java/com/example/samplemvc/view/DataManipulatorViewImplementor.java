@@ -15,6 +15,7 @@ import com.example.samplemvc.R;
 import com.example.samplemvc.controller.MVCDataManipulationController;
 import com.example.samplemvc.model.MCVModelImplementor;
 import com.example.samplemvc.model.bean.ToDo;
+import com.example.samplemvc.model.db.ToDoListDBAdapter;
 
 
 public class DataManipulatorViewImplementor implements MVCDataManipulatorView{
@@ -26,9 +27,9 @@ public class DataManipulatorViewImplementor implements MVCDataManipulatorView{
 
     private MCVModelImplementor mvcModel;
 
-    TextView textViewToBeModifiedToDoId, textViewToBeModifiedToDo, textViewToBeModifiedToDoPlace;
+    TextView textViewToBeModifiedToDoId;
+    EditText textViewToBeModifiedToDo, textViewToBeModifiedToDoPlace;
     Button buttonRemoveToDo, buttonModifyToDo;
-    EditText editTextNewToDo;
 
     ToDo toDo;
 
@@ -36,22 +37,22 @@ public class DataManipulatorViewImplementor implements MVCDataManipulatorView{
 
     public DataManipulatorViewImplementor(Context context, ViewGroup container, Intent intent){
         rootView = LayoutInflater.from(context).inflate(R.layout.acivity_data_manipulate, container);
-        mvcModel = new MCVModelImplementor(MyApplication.getToDoListDBAdapter());
+        //mvcModel = new MCVModelImplementor(MyApplication.getToDoListDBAdapter());
+        mvcModel = new MCVModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
         toDoId = intent.getLongExtra("todoId",1);
-        mvcModel = new MCVModelImplementor(MyApplication.getToDoListDBAdapter());
+        //mvcModel = new MCVModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
         mvcController = new MVCDataManipulationController(mvcModel,this);
     }
 
     @Override
     public void initViews() {
         textViewToBeModifiedToDoId  = (TextView)rootView.findViewById(R.id.textViewToBeModifiedToDoId);
-        textViewToBeModifiedToDo = (TextView)rootView.findViewById(R.id.textViewToBeModifiedToDo);
-        textViewToBeModifiedToDoPlace = (TextView)rootView.findViewById(R.id.textViewToBeModifiedToDoPlace);
+        textViewToBeModifiedToDo = (EditText)rootView.findViewById(R.id.textViewToBeModifiedToDo);
+        textViewToBeModifiedToDoPlace = (EditText)rootView.findViewById(R.id.textViewToBeModifiedToDoPlace);
 
         buttonRemoveToDo = (Button)rootView.findViewById(R.id.buttonRemoveToDo);
         buttonModifyToDo = (Button)rootView.findViewById(R.id.buttonModifyToDo);
 
-        editTextNewToDo = (EditText)rootView.findViewById(R.id.editTextNewToDo);
 
         buttonRemoveToDo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +64,7 @@ public class DataManipulatorViewImplementor implements MVCDataManipulatorView{
         buttonModifyToDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mvcController.onModifyButtonClicked(toDoId,editTextNewToDo.getText().toString());
+                mvcController.onModifyButtonClicked(toDoId,textViewToBeModifiedToDo.getText().toString(),textViewToBeModifiedToDoPlace.getText().toString());
             }
         });
 
@@ -79,9 +80,9 @@ public class DataManipulatorViewImplementor implements MVCDataManipulatorView{
     public void showSelectedToDo() {
         try{
             toDo = mvcModel.getToDo(toDoId);
-            textViewToBeModifiedToDoId.setText("Id: "+ toDo.getId());
-            textViewToBeModifiedToDo.setText("ToDo: "+toDo.getToDo());
-            textViewToBeModifiedToDoPlace.setText("Place: "+toDo.getPlace());
+            textViewToBeModifiedToDoId.setText("   "+ toDo.getId());
+            textViewToBeModifiedToDo.setText(" "+toDo.getToDo());
+            textViewToBeModifiedToDoPlace.setText(" "+toDo.getPlace());
         }catch (Exception ex){
             Toast.makeText(rootView.getContext(),ex.getMessage(), Toast.LENGTH_LONG).show();
         }

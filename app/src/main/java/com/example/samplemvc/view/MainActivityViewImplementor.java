@@ -18,6 +18,7 @@ import com.example.samplemvc.R;
 import com.example.samplemvc.controller.MVCMainActivityController;
 import com.example.samplemvc.model.MCVModelImplementor;
 import com.example.samplemvc.model.bean.ToDo;
+import com.example.samplemvc.model.db.ToDoListDBAdapter;
 import com.example.samplemvc.view.adapters.ToDoAdapter;
 
 import java.util.ArrayList;
@@ -30,9 +31,6 @@ public class MainActivityViewImplementor implements MVCMainActivityView, ToDoAda
 
     MVCMainActivityController mvcMainActivityController;
 
-    private MCVModelImplementor mvcModel = new MCVModelImplementor(MyApplication.getToDoListDBAdapter());
-
-
     private EditText editTextNewToDoString, editTextPlace;
     private RecyclerView recyclerView;
     private Button buttonAddToDo;
@@ -41,6 +39,9 @@ public class MainActivityViewImplementor implements MVCMainActivityView, ToDoAda
 
     public MainActivityViewImplementor (Context context, ViewGroup container){
         rootView = LayoutInflater.from(context).inflate(R.layout.activity_main,container);
+
+        //MCVModelImplementor mvcModel = new MCVModelImplementor(MyApplication.getToDoListDBAdapter());
+        MCVModelImplementor mvcModel = new MCVModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
 
         mvcMainActivityController = new MVCMainActivityController(mvcModel, this);
     }
