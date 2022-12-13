@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.samplemvc.MyApplication;
 import com.example.samplemvc.R;
 import com.example.samplemvc.controller.MVCDataManipulationController;
 import com.example.samplemvc.model.MCVModelImplementor;
@@ -19,8 +18,6 @@ import com.example.samplemvc.model.db.ToDoListDBAdapter;
 
 
 public class DataManipulatorViewImplementor implements MVCDataManipulatorView{
-
-
     View rootView;
 
     MVCDataManipulationController mvcController;
@@ -37,10 +34,8 @@ public class DataManipulatorViewImplementor implements MVCDataManipulatorView{
 
     public DataManipulatorViewImplementor(Context context, ViewGroup container, Intent intent){
         rootView = LayoutInflater.from(context).inflate(R.layout.acivity_data_manipulate, container);
-        //mvcModel = new MCVModelImplementor(MyApplication.getToDoListDBAdapter());
         mvcModel = new MCVModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
         toDoId = intent.getLongExtra("todoId",1);
-        //mvcModel = new MCVModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
         mvcController = new MVCDataManipulationController(mvcModel,this);
     }
 

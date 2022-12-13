@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.samplemvc.DataManipulationActivity;
-import com.example.samplemvc.MyApplication;
 import com.example.samplemvc.R;
 import com.example.samplemvc.controller.MVCMainActivityController;
 import com.example.samplemvc.model.MCVModelImplementor;
@@ -40,7 +39,6 @@ public class MainActivityViewImplementor implements MVCMainActivityView, ToDoAda
     public MainActivityViewImplementor (Context context, ViewGroup container){
         rootView = LayoutInflater.from(context).inflate(R.layout.activity_main,container);
 
-        //MCVModelImplementor mvcModel = new MCVModelImplementor(MyApplication.getToDoListDBAdapter());
         MCVModelImplementor mvcModel = new MCVModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
 
         mvcMainActivityController = new MVCMainActivityController(mvcModel, this);
