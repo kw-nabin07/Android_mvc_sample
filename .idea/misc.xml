@@ -3,9 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2275" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/drawable/ic_baseline_add_box_24.xml" value="0.2275" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/drawable/ic_baseline_article_24.xml" value="0.1365" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/drawable/ic_baseline_calendar_month_24.xml" value="0.1365" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/drawable/ic_baseline_edit_note_24.xml" value="0.2275" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/drawable/ic_baseline_event_note_24.xml" value="0.1365" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/drawable/ic_baseline_list_24.xml" value="0.2275" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/drawable/ic_baseline_notifications_active_24.xml" value="0.1365" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1365" />
         <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/acivity_data_manipulate.xml" value="0.22" />
-        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/activity_main.xml" value="0.13243243243243244" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/activity_show_all_to_do.xml" value="0.13333333333333333" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/activity_todo_list.xml" value="0.13243243243243244" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/activity_todo_register.xml" value="0.13243243243243244" />
         <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/todo_row_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/toolbar_title_layout.xml" value="0.25" />
       </map>
     </option>
   </component>

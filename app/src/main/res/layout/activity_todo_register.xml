@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".TodoRegisterActivity">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:id="@+id/editTextNewToDoString"
+        android:hint="TO DO" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textSize="25dp"
+        android:ems="10"
+        android:gravity="center"
+        android:id="@+id/editTextPlace"
+        android:hint="Place" />
+
+    <Button
+        android:text="Add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonAddToDo"
+        android:textSize="25dp"
+        android:layout_gravity="right"/>
+</LinearLayout>

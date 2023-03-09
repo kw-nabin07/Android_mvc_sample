@@ -5,42 +5,203 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_gravity="center"
     android:padding="10dp"
     tools:context="com.example.samplemvc.MainActivity">
-
-
-    <EditText
+    <TextView
+        android:id="@+id/today_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:ems="10"
-        android:textSize="25dp"
-        android:gravity="center"
-        android:id="@+id/editTextNewToDoString"
-        android:hint="TO DO" />
-
-    <EditText
+        android:textSize="32dp"
+        android:hint="Today's date"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:textSize="25dp"
-        android:ems="10"
-        android:gravity="center"
-        android:id="@+id/editTextPlace"
-        android:hint="Place" />
+        android:hint="Today's Special"
+        android:textSize="22dp"
+        android:textColor="@color/black"
+        >
+    </TextView>
 
-    <Button
-        android:text="Add"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/time_now"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonAddToDo"
-        android:textSize="25dp"
-        android:layout_gravity="right"/>
+        android:textSize="28dp"
+        android:textStyle="bold"
+        android:hint="Time"
+        android:textColor="@color/black"
+        />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center">
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="4"
+            >
+
+            <RelativeLayout
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_margin="5dp"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/AddToDoBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_baseline_add_box_24">
+
+                </ImageButton>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/AddToDoBtn"
+                    android:text="Todo 追加"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="16dp">
+
+                </TextView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_margin="5dp"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/EventListBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_baseline_list_24">
+
+                </ImageButton>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/EventListBtn"
+                    android:layout_centerHorizontal="true"
+                    android:text="Todo一覧"
+                    android:textSize="16dp">
+
+                </TextView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_margin="5dp"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/calenderBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_baseline_calendar_month_24">
+
+                </ImageButton>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/calenderBtn"
+                    android:layout_centerHorizontal="true"
+                    android:text="カレンダー"
+                    android:textSize="16dp">
+
+                </TextView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_margin="5dp"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/noteBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_baseline_edit_note_24">
+
+                </ImageButton>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/noteBtn"
+                    android:layout_centerHorizontal="true"
+                    android:text="メモ帳"
+                    android:textSize="16dp">
+
+                </TextView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_margin="5dp"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/notificationBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_baseline_notifications_active_24">
+
+                </ImageButton>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/notificationBtn"
+                    android:layout_centerHorizontal="true"
+                    android:text="通知"
+                    android:textSize="16dp">
+
+                </TextView>
+            </RelativeLayout>
+        </GridLayout>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/today_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="5dp"
+        android:hint="Schedule"
+        android:gravity="center"
+        android:text="本日のスケジュール"
+
+        >
+    </TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerListViewToDos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:scrollbars="vertical">
     </androidx.recyclerview.widget.RecyclerView>
 
 
