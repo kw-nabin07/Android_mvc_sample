@@ -21,7 +21,7 @@ import com.example.samplemvc.view.adapters.ToDoAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowAllToDoViewImplementor implements MVCMainActivityView, ToDoAdapter.ListItemClickListener {
+public class ShowAllToDoViewImplementor implements MVCShowAllTodoActivityView, ToDoAdapter.ListItemClickListener {
 
     View rootView;
     MVCShowAllToDoController mvcShowAllToDoController;
@@ -39,7 +39,7 @@ public class ShowAllToDoViewImplementor implements MVCMainActivityView, ToDoAdap
     @Override
     public void initViews() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(rootView.getContext());
-        recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerListViewToDos1);
+        recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerListViewToDos);
         recyclerView.setLayoutManager(linearLayoutManager);
 
 
@@ -56,15 +56,11 @@ public class ShowAllToDoViewImplementor implements MVCMainActivityView, ToDoAdap
     }
 
     @Override
-    public void updateViewonAdd(List<ToDo> toDoList) {
-        this.showAllToDos(toDoList);
-    }
-
-    @Override
     public void showAllToDos(List<ToDo> toDoList) {
         toDoAdapter = new ToDoAdapter(rootView.getContext(),toDoList, this);
         recyclerView.setAdapter(toDoAdapter);
     }
+
 
     @Override
     public void showErrorToast(String errorMessage) {
@@ -78,16 +74,15 @@ public class ShowAllToDoViewImplementor implements MVCMainActivityView, ToDoAdap
         toDoAdapter = new ToDoAdapter(rootView.getContext(), new ArrayList<ToDo>(), this);
         recyclerView.setAdapter(toDoAdapter);
     }
-
-    @Override
-    public void onItemClicked(long position) {
-        mvcShowAllToDoController.onToDoItemSelected(position);
-    }
-
     @Override
     public  void navigateToDataManipulationActivity(long id){
         Intent intent = new Intent(rootView.getContext(), DataManipulationActivity.class);
         intent.putExtra("todoId", id);
         rootView.getContext().startActivity(intent);
+    }
+
+    @Override
+    public void onItemClicked(long position) {
+        mvcShowAllToDoController.onToDoItemSelected(position);
     }
 }

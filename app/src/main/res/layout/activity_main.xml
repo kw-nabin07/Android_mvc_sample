@@ -12,16 +12,19 @@
         android:id="@+id/today_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="32dp"
+        android:textSize="28dp"
         android:hint="Today's date"
         android:textStyle="bold"
         android:textColor="@color/black"
         />
     <TextView
+        android:id="@+id/today_day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Today's Special"
-        android:textSize="22dp"
+        android:hint="Day"
+        android:textSize="23dp"
+        android:textStyle="bold"
+        android:letterSpacing="0.1"
         android:textColor="@color/black"
         >
     </TextView>
@@ -30,7 +33,7 @@
         android:id="@+id/time_now"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="28dp"
+        android:textSize="26dp"
         android:textStyle="bold"
         android:hint="Time"
         android:textColor="@color/black"
@@ -39,7 +42,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:gravity="center">
 
         <GridLayout
@@ -47,7 +50,6 @@
             android:layout_height="wrap_content"
             android:columnCount="4"
             >
-
             <RelativeLayout
                 android:layout_width="85dp"
                 android:layout_height="85dp"
@@ -182,25 +184,51 @@
 
                 </TextView>
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_margin="5dp"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/settingBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_baseline_settings_24">
+
+                </ImageButton>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/settingBtn"
+                    android:layout_centerHorizontal="true"
+                    android:text="設定"
+                    android:textSize="16dp">
+
+                </TextView>
+            </RelativeLayout>
         </GridLayout>
     </RelativeLayout>
     <TextView
         android:id="@+id/today_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginTop="5dp"
+        android:textSize="18dp"
+        android:layout_marginTop="10dp"
         android:hint="Schedule"
-        android:gravity="center"
+        android:textStyle="bold"
         android:text="本日のスケジュール"
 
         >
     </TextView>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerListViewToDos"
+        android:id="@+id/recyclerListViewToDosToday"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:scrollbars="vertical">
     </androidx.recyclerview.widget.RecyclerView>
 

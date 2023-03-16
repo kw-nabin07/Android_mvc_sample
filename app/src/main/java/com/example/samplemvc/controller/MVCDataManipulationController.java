@@ -31,11 +31,11 @@ public class MVCDataManipulationController implements MVCController{
 
    }
 
-   public void onModifyButtonClicked(long id, String newTODo,String newAddress){
+   public void onModifyButtonClicked(long id, String newTODo,String newAddress,String newDate, String newTime){
        try{
-           boolean success = mvcModel.modifyToDoItem(id,newTODo,newAddress);
+           boolean success = mvcModel.modifyToDoItem(id,newTODo,newAddress,newDate,newTime);
            if(success){
-               mvcView.updateViewOnModify(mvcModel.getToDo(id));
+               mvcView.updateViewOnModify();
            }
        }catch (Exception e){
            mvcView.showErrorToast(e.getMessage());

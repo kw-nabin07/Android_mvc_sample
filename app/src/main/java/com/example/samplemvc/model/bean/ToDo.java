@@ -3,24 +3,27 @@ package com.example.samplemvc.model.bean;
 public class ToDo {
 
     private long id;
-    private String toDo;
+    private String title;
     private String place;
+    private String date;
+    private String time;
+
 
     public ToDo(){
         super();
     }
 
-    public ToDo(long id, String toDo){
+    public ToDo(long id, String title){
         this.id=id;
-        this.toDo=toDo;
+        this.title=title;
     }
-
-    public ToDo(long id, String toDo, String place){
-        this.id=id;
-        this.toDo=toDo;
-        this.place=place;
+    public ToDo(long id, String title, String place, String date, String time) {
+        this.id = id;
+        this.title = title;
+        this.place = place;
+        this.date = date;
+        this.time = time;
     }
-
 
     public long getId() {
         return id;
@@ -30,12 +33,12 @@ public class ToDo {
         this.id = id;
     }
 
-    public String getToDo() {
-        return toDo;
+    public String getTitle() {
+        return title;
     }
 
-    public void setToDo(String toDo) {
-        this.toDo = toDo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getPlace() {
@@ -46,9 +49,25 @@ public class ToDo {
         this.place = place;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     @Override
     public String toString() {
-        return "("+ id+", "+toDo+", "+place+")";
+        return "("+ id+", "+title+", "+place+")";
     }
 
     @Override

@@ -8,10 +8,10 @@ import com.example.samplemvc.model.db.ToDoListDBAdapter;
 import java.util.List;
 
 public class MCVModelImplementor implements MVCModel {
-
     ToDoListDBAdapter toDoListDBAdapter;
 
     List<ToDo> toDoItems;
+    List<ToDo> toDoItemsToday;
 
     public MCVModelImplementor(ToDoListDBAdapter toDoListDBAdapter){
         this.toDoListDBAdapter = toDoListDBAdapter;
@@ -29,8 +29,8 @@ public class MCVModelImplementor implements MVCModel {
     }
 
     @Override
-    public boolean addToDoItem(String toDoItem, String place) throws Exception{
-        boolean addSuccess = toDoListDBAdapter.insert(toDoItem, place);
+    public boolean addToDoItem(String toDoItem, String place, String date, String time) throws Exception{
+        boolean addSuccess = toDoListDBAdapter.insert(toDoItem, place, date, time);
         if (addSuccess){
             refresh();
         }else{
@@ -47,19 +47,19 @@ public class MCVModelImplementor implements MVCModel {
         if(deleteSuccess){
             refresh();
         }else{
-            throw new ToDoNotFoundException("Id is wrong");
+            throw new ToDoNotFoundException("Id is wrong in remove");
         }
         return deleteSuccess;
 
     }
 
     @Override
-    public boolean modifyToDoItem(long id, String newToDoValuel,String newAddressValue) throws Exception{
-        boolean modifySuccess = toDoListDBAdapter.modify(id,newToDoValuel,newAddressValue);
+    public boolean modifyToDoItem(long id, String newToDoValuel,String newAddressValue,String newDateValue,String newTimeValue) throws Exception{
+        boolean modifySuccess = toDoListDBAdapter.modify(id,newToDoValuel,newAddressValue,newDateValue,newTimeValue);
         if(modifySuccess){
             refresh();
         } else{
-            throw new ToDoNotFoundException("Id is wrong");
+            throw new ToDoNotFoundException("Id is wrong in db");
         }
         return modifySuccess;
     }
@@ -73,7 +73,7 @@ public class MCVModelImplementor implements MVCModel {
             }
         }
         if(toDo==null){
-            throw new ToDoNotFoundException("Id is wrong");
+            throw new ToDoNotFoundException("Id is wrong in get todo");
         }
         return toDo;
     }

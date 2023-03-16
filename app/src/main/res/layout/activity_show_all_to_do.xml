@@ -10,13 +10,19 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ToDo List"
-        android:textSize="20dp">
+        android:text="TODO 一覧"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/teal_700"
+        android:gravity="center"
+        android:textSize="26dp">
 
     </TextView>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerListViewToDos1"
+        android:id="@+id/recyclerListViewToDos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        >
     </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
