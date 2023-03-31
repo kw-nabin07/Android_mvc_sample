@@ -4,9 +4,10 @@ public class ToDo {
 
     private long id;
     private String title;
-    private String place;
+    private String details;
     private String date;
     private String time;
+    private int notificationStatus;
 
 
     public ToDo(){
@@ -17,12 +18,13 @@ public class ToDo {
         this.id=id;
         this.title=title;
     }
-    public ToDo(long id, String title, String place, String date, String time) {
+    public ToDo(long id, String title, String details, String date, String time, int notificationStatus) {
         this.id = id;
         this.title = title;
-        this.place = place;
+        this.details = details;
         this.date = date;
         this.time = time;
+        this.notificationStatus = notificationStatus;
     }
 
     public long getId() {
@@ -41,12 +43,12 @@ public class ToDo {
         this.title = title;
     }
 
-    public String getPlace() {
-        return place;
+    public String getDetails() {
+        return details;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public String getDate() {
@@ -65,9 +67,17 @@ public class ToDo {
         this.time = time;
     }
 
+    public int getNotificationStatus() {
+        return notificationStatus;
+    }
+
+    public void setNotificationStatus(int notificationStatus) {
+        this.notificationStatus = notificationStatus;
+    }
+
     @Override
     public String toString() {
-        return "("+ id+", "+title+", "+place+")";
+        return "("+ id+", "+title+", "+details+")";
     }
 
     @Override

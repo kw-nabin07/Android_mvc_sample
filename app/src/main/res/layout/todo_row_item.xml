@@ -35,10 +35,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
-                android:text="Place"
+                android:text="Details"
                 android:textSize="22dp"
                 android:letterSpacing="0.1"
-                android:id="@+id/textViewPlace"/>
+                android:id="@+id/textViewDetails"/>
 
 
     </LinearLayout>

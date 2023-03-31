@@ -14,7 +14,11 @@
         <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.2235" />
         <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1365" />
         <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/acivity_data_manipulate.xml" value="0.22" />
-        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/activity_calender_view.xml" value="0.21837606837606838" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/activity_main.xml" value="0.15028409090909092" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/activity_note.xml" value="0.21452991452991452" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/activity_notification.xml" value="0.21" />
+        <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/activity_setting.xml" value="0.2094017094017094" />
         <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/activity_show_all_to_do.xml" value="0.22" />
         <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/activity_splash.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/nabin/AndroidStudioProjects/SampleMVC/app/src/main/res/layout/activity_todo_list.xml" value="0.13243243243243244" />

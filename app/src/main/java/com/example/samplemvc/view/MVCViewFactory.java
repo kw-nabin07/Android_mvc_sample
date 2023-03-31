@@ -14,9 +14,10 @@ public class MVCViewFactory {
         MVCView mvcView = null;
         switch (viewType){
             case MAIN_VIEW_TYPE: mvcView = new MainActivityViewImplementor(context, viewGroup); break;
-            case SHOW_TODO_VIEW_TYPE: mvcView = new ShowAllToDoViewImplementor(context, viewGroup); break;
+            case SHOW_TODO_VIEW_TYPE: mvcView = new AllToDoViewImplementor(context, viewGroup); break;
             case TODO_REGISTER_VIEW_TYPE: mvcView = new DataRegisterViewImplementor(context, viewGroup); break;
             case MANIPULATION_VIEW_TYPE:mvcView = new DataManipulatorViewImplementor(context, viewGroup, intent); break;
+
             default:
                 throw new IllegalStateException("Unexpected value: " + viewType);
         }

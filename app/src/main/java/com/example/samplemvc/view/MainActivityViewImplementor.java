@@ -10,11 +10,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.samplemvc.CalenderViewActivity;
 import com.example.samplemvc.DataManipulationActivity;
+import com.example.samplemvc.NoteActivity;
+import com.example.samplemvc.NotificationActivity;
 import com.example.samplemvc.R;
 import com.example.samplemvc.ShowAllToDoActivity;
 import com.example.samplemvc.TodoRegisterActivity;
@@ -46,7 +48,6 @@ public class MainActivityViewImplementor implements MVCShowAllTodoActivityView,T
         MCVModelImplementor mvcModel = new MCVModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
         mvcMainActivityController = new MVCMainActivityController(mvcModel, this);
     }
-
     @Override
     public void initViews() {
         TextView today_date = (TextView) rootView.findViewById(R.id.today_date);
@@ -58,8 +59,48 @@ public class MainActivityViewImplementor implements MVCShowAllTodoActivityView,T
 
         ImageButton buttonAddToDo = (ImageButton) rootView.findViewById(R.id.AddToDoBtn);
         ImageButton buttonViewToDo = (ImageButton) rootView.findViewById(R.id.EventListBtn);
-        Thread thread = new Thread(new Runnable()
-        {
+        ImageButton calenderBtn = (ImageButton) rootView.findViewById(R.id.calenderBtn);
+        ImageButton noteBtn = (ImageButton) rootView.findViewById(R.id.noteBtn);
+        ImageButton notificationBtn = (ImageButton) rootView.findViewById(R.id.notificationBtn);
+
+
+        buttonViewToDo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(rootView.getContext(), ShowAllToDoActivity.class);
+                rootView.getContext().startActivity(intent);
+            }
+        });
+        buttonAddToDo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(rootView.getContext(), TodoRegisterActivity.class);
+                rootView.getContext().startActivity(intent);
+            }
+        });
+        calenderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(rootView.getContext(), CalenderViewActivity.class);
+                rootView.getContext().startActivity(intent);
+            }
+        });
+        notificationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(rootView.getContext(), NotificationActivity.class);
+                rootView.getContext().startActivity(intent);
+            }
+        });
+        noteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(rootView.getContext(), NoteActivity.class);
+                rootView.getContext().startActivity(intent);
+            }
+        });
+
+        Thread thread = new Thread(new Runnable(){
             int lastMinute;
             int currentMinute,currentDay;
             @Override
@@ -82,31 +123,15 @@ public class MainActivityViewImplementor implements MVCShowAllTodoActivityView,T
                             today_date.setTextColor(Color.parseColor("#E83E31"));
                             today_day.setTextColor(Color.parseColor("#E83E31"));
                         }
-                        SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a",jp);
+                        SimpleDateFormat sdf_time = new SimpleDateFormat("KK:mm a",jp);
                         time_now.setText(sdf_time.format(calendar.getTime()));
                     }
                 }
             }
         });
         thread.start();
-
-        buttonViewToDo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(rootView.getContext(), ShowAllToDoActivity.class);
-                rootView.getContext().startActivity(intent);
-
-            }
-        });
-        buttonAddToDo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(rootView.getContext(), TodoRegisterActivity.class);
-                rootView.getContext().startActivity(intent);
-            }
-        });
-
     }
+
     String getTodayDay(int day){
         String strToday = null;
         if(day == 1){
@@ -126,6 +151,8 @@ public class MainActivityViewImplementor implements MVCShowAllTodoActivityView,T
         }
         return strToday;
     }
+
+
     @Override
     public void bindDataToView() {
      mvcMainActivityController.onViewLoaded();

@@ -21,28 +21,23 @@ import com.example.samplemvc.view.adapters.ToDoAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowAllToDoViewImplementor implements MVCShowAllTodoActivityView, ToDoAdapter.ListItemClickListener {
-
+public class AllToDoViewImplementor implements MVCShowAllTodoActivityView, ToDoAdapter.ListItemClickListener {
     View rootView;
     MVCShowAllToDoController mvcShowAllToDoController;
     private RecyclerView recyclerView;
-
     ToDoAdapter toDoAdapter;
 
-    public ShowAllToDoViewImplementor (Context context, ViewGroup container){
+    public AllToDoViewImplementor(Context context, ViewGroup container){
         rootView = LayoutInflater.from(context).inflate(R.layout.activity_show_all_to_do,container);
         MCVModelImplementor mvcModel = new MCVModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
         mvcShowAllToDoController = new MVCShowAllToDoController(mvcModel, this);
     }
-
 
     @Override
     public void initViews() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(rootView.getContext());
         recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerListViewToDos);
         recyclerView.setLayoutManager(linearLayoutManager);
-
-
     }
 
     @Override
@@ -60,7 +55,6 @@ public class ShowAllToDoViewImplementor implements MVCShowAllTodoActivityView, T
         toDoAdapter = new ToDoAdapter(rootView.getContext(),toDoList, this);
         recyclerView.setAdapter(toDoAdapter);
     }
-
 
     @Override
     public void showErrorToast(String errorMessage) {
@@ -80,9 +74,9 @@ public class ShowAllToDoViewImplementor implements MVCShowAllTodoActivityView, T
         intent.putExtra("todoId", id);
         rootView.getContext().startActivity(intent);
     }
-
     @Override
     public void onItemClicked(long position) {
         mvcShowAllToDoController.onToDoItemSelected(position);
     }
+
 }

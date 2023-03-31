@@ -12,8 +12,8 @@
         android:id="@+id/today_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="28dp"
-        android:hint="Today's date"
+        android:textSize="28sp"
+        android:hint="@string/today_s_dateHint"
         android:textStyle="bold"
         android:textColor="@color/black"
         />
@@ -21,8 +21,8 @@
         android:id="@+id/today_day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Day"
-        android:textSize="23dp"
+        android:hint="@string/dayHint"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:letterSpacing="0.1"
         android:textColor="@color/black"
@@ -33,9 +33,9 @@
         android:id="@+id/time_now"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="26dp"
+        android:textSize="26sp"
         android:textStyle="bold"
-        android:hint="Time"
+        android:hint="@string/timeHint"
         android:textColor="@color/black"
         />
 
@@ -48,8 +48,8 @@
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:columnCount="4"
-            >
+            android:columnCount="4">
+
             <RelativeLayout
                 android:layout_width="85dp"
                 android:layout_height="85dp"
@@ -70,9 +70,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/AddToDoBtn"
-                    android:text="Todo 追加"
                     android:layout_centerHorizontal="true"
-                    android:textSize="16dp">
+                    android:text="@string/txtTodoAdd"
+                    android:textSize="16sp">
 
                 </TextView>
             </RelativeLayout>
@@ -98,8 +98,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/EventListBtn"
                     android:layout_centerHorizontal="true"
-                    android:text="Todo一覧"
-                    android:textSize="16dp">
+                    android:text="@string/txtTodoList"
+                    android:textSize="16sp">
 
                 </TextView>
             </RelativeLayout>
@@ -114,8 +114,8 @@
                     android:id="@+id/calenderBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:layout_centerHorizontal="true"
+                    android:background="@color/white"
                     android:src="@drawable/ic_baseline_calendar_month_24">
 
                 </ImageButton>
@@ -125,8 +125,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/calenderBtn"
                     android:layout_centerHorizontal="true"
-                    android:text="カレンダー"
-                    android:textSize="16dp">
+                    android:text="@string/txtCalender"
+                    android:textSize="16sp">
 
                 </TextView>
             </RelativeLayout>
@@ -141,9 +141,10 @@
                     android:id="@+id/noteBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/ic_baseline_edit_note_24">
+                    android:background="@color/white"
+                    android:src="@drawable/ic_baseline_edit_note_24"
+                    android:contentDescription="@string/todoDes">
 
                 </ImageButton>
 
@@ -152,8 +153,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/noteBtn"
                     android:layout_centerHorizontal="true"
-                    android:text="メモ帳"
-                    android:textSize="16dp">
+                    android:text="@string/txtMemo"
+                    android:textSize="16sp">
 
                 </TextView>
             </RelativeLayout>
@@ -168,9 +169,10 @@
                     android:id="@+id/notificationBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/ic_baseline_notifications_active_24">
+                    android:background="@color/white"
+                    android:src="@drawable/ic_baseline_notifications_active_24"
+                    android:contentDescription="@string/todoDescription">
 
                 </ImageButton>
 
@@ -179,48 +181,22 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/notificationBtn"
                     android:layout_centerHorizontal="true"
-                    android:text="通知"
-                    android:textSize="16dp">
+                    android:text="@string/txtNotice"
+                    android:textSize="16sp">
 
                 </TextView>
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:layout_margin="5dp"
-                android:gravity="center">
 
-                <ImageButton
-                    android:id="@+id/settingBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/ic_baseline_settings_24">
-
-                </ImageButton>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/settingBtn"
-                    android:layout_centerHorizontal="true"
-                    android:text="設定"
-                    android:textSize="16dp">
-
-                </TextView>
-            </RelativeLayout>
         </GridLayout>
     </RelativeLayout>
     <TextView
         android:id="@+id/today_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:layout_marginTop="10dp"
-        android:hint="Schedule"
         android:textStyle="bold"
-        android:text="本日のスケジュール"
+        android:text="@string/txtScheduleTitle"
 
         >
     </TextView>

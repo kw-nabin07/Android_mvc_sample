@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">ToDo Application</string>
+    <string name="txtCalender">カレンダー</string>
+    <string name="txtTodoList">Todo一覧</string>
+    <string name="txtTodoAdd">Todo 追加</string>
+    <string name="txtMemo">メモ帳</string>
+    <string name="todoDescription">TODO</string>
+    <string name="txtNotice">通知</string>
+    <string name="txtSchedule">Schedule</string>
+    <string name="txtScheduleTitle">本日のスケジュール</string>
+    <string name="timeHint">Time</string>
+    <string name="dayHint">Day</string>
+    <string name="today_s_dateHint">Today\'s date</string>
+    <string name="todoDes">TODO</string>
 </resources>

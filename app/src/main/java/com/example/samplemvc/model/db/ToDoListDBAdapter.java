@@ -25,13 +25,14 @@ public class ToDoListDBAdapter {
     private static final String TABLE_TODO="table_todo";
     private static final String COLUMN_TODO_ID="task_id";
     private static final String COLUMN_TODO="todo";
-    private static final String COLUMN_PLACE="place";
+    private static final String COLUMN_INFO="details";
     private static final String COLUMN_DATE="date";
     private static final String COLUMN_TIME="time";
+    private static final String COLUMN_NOTICE="notice_status";
 
     //create table table_todo(task_id integer primary key, todo text not null);
     private static String CREATE_TABLE_TODO="CREATE TABLE "+TABLE_TODO+"("+COLUMN_TODO_ID+" INTEGER PRIMARY KEY, "+COLUMN_TODO+" TEXT NOT NULL, "+
-            COLUMN_PLACE+ " TEXT NOT NULL,"+COLUMN_DATE+" TEXT NOT NULL,"+COLUMN_TIME+" TEXT NOT NULL )";
+            COLUMN_INFO+ " TEXT NOT NULL,"+COLUMN_DATE+" TEXT NOT NULL,"+COLUMN_TIME+" TEXT NOT NULL,"+COLUMN_NOTICE+" INTEGER DEFAULT 0)";
 
     private Context context;
     private SQLiteDatabase  sqLliteDatabase;
@@ -51,14 +52,13 @@ public class ToDoListDBAdapter {
     }
 
 
-    public boolean insert(String toDoItem, String place,String date, String time){
+    public boolean insert(String toDoItem, String details,String date, String time,int notificationStatus){
         ContentValues contentValues=new ContentValues();
         contentValues.put(COLUMN_TODO,toDoItem);
-        contentValues.put(COLUMN_PLACE,place);
+        contentValues.put(COLUMN_INFO,details);
         contentValues.put(COLUMN_DATE,date);
         contentValues.put(COLUMN_TIME,time);
-
-        Log.d(TAG,toDoItem+","+place+","+date+","+time);
+        contentValues.put(COLUMN_NOTICE,notificationStatus);
 
         return sqLliteDatabase.insert(TABLE_TODO,null,contentValues)>0;
     }
@@ -67,25 +67,24 @@ public class ToDoListDBAdapter {
        return sqLliteDatabase.delete(TABLE_TODO, COLUMN_TODO_ID+" = "+taskId,null)>0;
     }
 
-    public boolean modify(long taskId, String newToDoItem, String newAddress, String newDate, String newTime){
+    public boolean modify(long taskId, String newToDoItem, String newDetails, String newDate, String newTime,int newNotificationStatus){
         ContentValues contentValues=new ContentValues();
         contentValues.put(COLUMN_TODO,newToDoItem);
-        contentValues.put(COLUMN_PLACE,newAddress);
+        contentValues.put(COLUMN_INFO,newDetails);
         contentValues.put(COLUMN_DATE,newDate);
         contentValues.put(COLUMN_TIME,newTime);
+        contentValues.put(COLUMN_NOTICE,newNotificationStatus);
 
        return sqLliteDatabase.update(TABLE_TODO,contentValues, COLUMN_TODO_ID+" = "+taskId,null)>0;
     }
 
     public List<ToDo> getAllToDos(){
         List<ToDo> toDoList=new ArrayList<ToDo>();
-        Cursor cursor=sqLliteDatabase.query(TABLE_TODO,new String[]{COLUMN_TODO_ID,COLUMN_TODO, COLUMN_PLACE, COLUMN_DATE, COLUMN_TIME},null,null,null,null,null,null);
-
+        Cursor cursor=sqLliteDatabase.query(TABLE_TODO,new String[]{COLUMN_TODO_ID,COLUMN_TODO, COLUMN_INFO, COLUMN_DATE, COLUMN_TIME, COLUMN_NOTICE},null,null,null,null,null,null);
         if(cursor!=null &cursor.getCount()>0){
             while(cursor.moveToNext()){
-                ToDo toDo=new ToDo(cursor.getLong(0),cursor.getString(1), cursor.getString(2),cursor.getString(3),cursor.getString(4));
+                ToDo toDo=new ToDo(cursor.getLong(0),cursor.getString(1), cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(5));
                 toDoList.add(toDo);
-
             }
         }
         cursor.close();
@@ -114,7 +113,7 @@ public class ToDoListDBAdapter {
         public void onUpgrade(SQLiteDatabase sqLiteDatabase,
                               int oldVersion, int newVersion) {
               switch (oldVersion){
-                case 1: sqLiteDatabase.execSQL("ALTER TABLE "+TABLE_TODO+ " ADD COLUMN "+COLUMN_PLACE+" TEXT");break;
+                case 1: sqLiteDatabase.execSQL("ALTER TABLE "+TABLE_TODO+ " ADD COLUMN "+COLUMN_INFO+" TEXT");break;
                 default: break;
             }
             Log.i(TAG,"Inside onUpgrade");

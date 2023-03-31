@@ -1,13 +1,13 @@
 package com.example.samplemvc.controller;
 
 import com.example.samplemvc.model.MCVModelImplementor;
-import com.example.samplemvc.view.ShowAllToDoViewImplementor;
+import com.example.samplemvc.view.AllToDoViewImplementor;
 
 public class MVCShowAllToDoController implements MVCController {
     MCVModelImplementor mvcModel;
-    ShowAllToDoViewImplementor mvcView;
+    AllToDoViewImplementor mvcView;
 
-    public MVCShowAllToDoController(MCVModelImplementor mvcModel, ShowAllToDoViewImplementor mvcView){
+    public MVCShowAllToDoController(MCVModelImplementor mvcModel, AllToDoViewImplementor mvcView){
         this.mvcModel = mvcModel;
         this.mvcView = mvcView;
     }
@@ -20,7 +20,6 @@ public class MVCShowAllToDoController implements MVCController {
             mvcView.showErrorToast(e.getMessage());
         }
     }
-
     public void onToDoItemSelected(long toDoId){
         mvcView.navigateToDataManipulationActivity(toDoId);
     }
