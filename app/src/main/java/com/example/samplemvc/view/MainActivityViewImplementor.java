@@ -100,36 +100,36 @@ public class MainActivityViewImplementor implements MVCShowAllTodoActivityView,T
                 rootView.getContext().startActivity(intent);
             }
         });
-//            Thread thread = new Thread(new Runnable(){
-//            int lastMinute;
-//            int currentMinute,currentDay;
-//            @Override
-//            public void run()
-//            {
-//                lastMinute = currentMinute;
-//                while (true)
-//                {
-//                    Calendar calendar = Calendar.getInstance();
-//                    calendar.setTimeInMillis(System.currentTimeMillis());
-//                    currentMinute = calendar.get(Calendar.MINUTE);
-//                    currentDay = calendar.get(Calendar.DAY_OF_WEEK);
-//                    if (currentMinute != lastMinute){
-//                        lastMinute = currentMinute;
-//                        Locale jp = new Locale("ja", "JP", "JP");
-//                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日",jp);
-//                        today_date.setText(sdf.format(calendar.getTime()));
-//                        today_day.setText(getTodayDay(currentDay));
-//                        if(currentDay == 1 || currentDay == 7){
-//                            today_date.setTextColor(Color.parseColor("#E83E31"));
-//                            today_day.setTextColor(Color.parseColor("#E83E31"));
-//                        }
-//                        SimpleDateFormat sdf_time = new SimpleDateFormat("KK:mm a",jp);
-//                        time_now.setText(sdf_time.format(calendar.getTime()));
-//                    }
-//                }
-//            }
-//        });
-//        thread.start();
+            Thread thread = new Thread(new Runnable(){
+            int lastMinute;
+            int currentMinute,currentDay;
+            @Override
+            public void run()
+            {
+                lastMinute = currentMinute;
+                while (true)
+                {
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTimeInMillis(System.currentTimeMillis());
+                    currentMinute = calendar.get(Calendar.MINUTE);
+                    currentDay = calendar.get(Calendar.DAY_OF_WEEK);
+                    if (currentMinute != lastMinute){
+                        lastMinute = currentMinute;
+                        Locale jp = new Locale("ja", "JP", "JP");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日",jp);
+                        today_date.setText(sdf.format(calendar.getTime()));
+                        today_day.setText(getTodayDay(currentDay));
+                        if(currentDay == 1 || currentDay == 7){
+                            today_date.setTextColor(Color.parseColor("#E83E31"));
+                            today_day.setTextColor(Color.parseColor("#E83E31"));
+                        }
+                        SimpleDateFormat sdf_time = new SimpleDateFormat("KK:mm a",jp);
+                        time_now.setText(sdf_time.format(calendar.getTime()));
+                    }
+                }
+            }
+        });
+        thread.start();
     }
 
     String getTodayDay(int day){
