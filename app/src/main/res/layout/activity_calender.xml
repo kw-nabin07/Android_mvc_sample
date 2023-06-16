@@ -5,11 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ShowAllToDoActivity">
+    tools:context=".CalenderActivity">
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:headerColor="#1C2833"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/toDos_all"
+        android:id="@+id/toDos_bySelected_date"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:scrollbars="vertical">
     </androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>

@@ -19,7 +19,7 @@
             android:gravity="center"
             android:text="Todo"
             android:textColor="@color/white"
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:textStyle="bold">
         </TextView>
     </RelativeLayout>

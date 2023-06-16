@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_margin="3dp"
+    android:layout_margin="3sp"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -10,13 +10,13 @@
         android:orientation="vertical"
         android:id="@+id/layoutContainer"
         android:background="#F6F4F4"
-        android:paddingLeft="3dp"
+        android:paddingLeft="3sp"
         android:clickable="true">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="25dp"
+                android:textSize="18sp"
                 android:textColor="#DD8707"
                 android:textStyle="bold"
                 android:text="Date Time Status"
@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24dp"
+                android:textSize="16sp"
                 android:textColor="#228A0B"
                 android:textStyle="bold"
                 android:text="Title"
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:text="Details"
-                android:textSize="22dp"
+                android:textSize="14sp"
                 android:letterSpacing="0.1"
                 android:id="@+id/textViewDetails"/>
 

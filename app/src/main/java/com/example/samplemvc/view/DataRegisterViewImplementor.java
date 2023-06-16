@@ -1,5 +1,6 @@
 package com.example.samplemvc.view;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -10,29 +11,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.samplemvc.NotificationHelper;
 import com.example.samplemvc.R;
 import com.example.samplemvc.controller.MVCDataRegisterController;
-import com.example.samplemvc.model.MCVModelImplementor;
-import com.example.samplemvc.model.bean.ToDo;
+import com.example.samplemvc.model.MVCModelImplementor;
 import com.example.samplemvc.model.db.ToDoListDBAdapter;
 
-import java.text.BreakIterator;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 
 public class DataRegisterViewImplementor implements MVCRegisterActivityView{
@@ -43,12 +39,12 @@ public class DataRegisterViewImplementor implements MVCRegisterActivityView{
     DatePickerDialog.OnDateSetListener dateSetListener;
     MVCDataRegisterController mvcDataRegisterController;
     private EditText text_todo, text_info,text_date,text_time;
-    private Button buttonAddToDo,buttonDatePicker,buttonTimePicker;
-    private Switch notificationSwitch;
+    RadioGroup setMinuteRadioGroup;
+    int setNotificationShowTime;
 
     public DataRegisterViewImplementor (Context context, ViewGroup container){
         rootView = LayoutInflater.from(context).inflate(R.layout.activity_todo_register,container);
-        MCVModelImplementor mvcModel = new MCVModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
+        MVCModelImplementor mvcModel = new MVCModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
         mvcDataRegisterController = new MVCDataRegisterController(mvcModel, this);
     }
 
@@ -58,13 +54,52 @@ public class DataRegisterViewImplementor implements MVCRegisterActivityView{
         text_info=(EditText)rootView.findViewById(R.id.editTextDetails);
         text_date=(EditText)rootView.findViewById(R.id.date_text);
         text_time=(EditText)rootView.findViewById(R.id.time_text);
-        notificationSwitch=(Switch)rootView.findViewById(R.id.notificationSwitch);
+        @SuppressLint("UseSwitchCompatOrMaterialCode")
+        Switch notificationSwitch = (Switch) rootView.findViewById(R.id.notificationSwitch);
 
-        buttonAddToDo = (Button) rootView.findViewById(R.id.buttonAddToDo);
-        buttonDatePicker = (Button) rootView.findViewById(R.id.btnDatePicker);
-        buttonTimePicker = (Button) rootView.findViewById(R.id.btnTimePicker);
+        Button buttonAddToDo = (Button) rootView.findViewById(R.id.buttonAddToDo);
+        Button buttonDatePicker = (Button) rootView.findViewById(R.id.btnDatePicker);
+        Button buttonTimePicker = (Button) rootView.findViewById(R.id.btnTimePicker);
+        setMinuteRadioGroup = (RadioGroup) rootView.findViewById(R.id.setMinuteRadioGroup);
 
+        Boolean notice_status = notificationSwitch.isChecked();
 
+        setMinuteRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton checkedRadioButton = rootView.findViewById(checkedId);
+                String text = checkedRadioButton.getText().toString();
+                switch (text) {
+                    case "5分前":
+                        setNotificationShowTime = 5;
+                        break;
+                    case "15分前":
+                        setNotificationShowTime = 15;
+                        break;
+                    case "30分前":
+                        setNotificationShowTime = 30;
+                        break;
+                    case "1時間前":
+                        setNotificationShowTime = 60;
+                        break;
+                }
+
+                //Toast.makeText(rootView.getContext(), setNotificationShowTime + " is selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // If the switch is on, set the linear layout to be visible
+                if (isChecked) {
+                    setMinuteRadioGroup.setVisibility(View.VISIBLE);
+
+                }else {
+                    setMinuteRadioGroup.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
         buttonDatePicker.setOnClickListener(new View.OnClickListener() {
             final Calendar cal = Calendar.getInstance();
             int yYear, mMonth, dDay,style;
@@ -76,7 +111,6 @@ public class DataRegisterViewImplementor implements MVCRegisterActivityView{
                         cal.set(Calendar.YEAR,year);
                         cal.set(Calendar.MONTH,month);
                         cal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-
                         String date = year + "-"+ (month + 1) + "-" + dayOfMonth;
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         try{
@@ -127,6 +161,7 @@ public class DataRegisterViewImplementor implements MVCRegisterActivityView{
                 timePickerDialog.show();
             }
         });
+
         buttonAddToDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,14 +170,19 @@ public class DataRegisterViewImplementor implements MVCRegisterActivityView{
                 String strDate = text_date.getText().toString();
                 String date = strDate.replace(" ","");
                 String time = text_time.getText().toString();
+                if (todo.equals("") || info.equals("") || date.equals("") || time.equals("")){
+                    Toast.makeText(rootView.getContext(),"Need to set all info.", Toast.LENGTH_LONG).show();
+                }
                 int notificationStatus;
-                Boolean notice_status = notificationSwitch.isChecked();
+                if (setNotificationShowTime == 0){
+                    setNotificationShowTime = 15;
+                }
                 if(notice_status){
                     notificationStatus = 1;
                 }else {
                     notificationStatus = 0;
                 }
-                mvcDataRegisterController.onAddButtonClicked(rootView.getContext(),todo, info, date, time,notificationStatus);
+                mvcDataRegisterController.onAddButtonClicked(rootView.getContext(),todo, info, date, time,notificationStatus,setNotificationShowTime);
 
             }
         });
@@ -174,9 +214,9 @@ public class DataRegisterViewImplementor implements MVCRegisterActivityView{
     @Override
     public void showErrorToast(String errorMessage) {
         if(errorMessage.equals("Empty To Do List")){
-
+            Toast.makeText(rootView.getContext(),errorMessage, Toast.LENGTH_LONG).show();
         }
-        Toast.makeText(rootView.getContext(),errorMessage, Toast.LENGTH_LONG).show();
+
     }
 
 }

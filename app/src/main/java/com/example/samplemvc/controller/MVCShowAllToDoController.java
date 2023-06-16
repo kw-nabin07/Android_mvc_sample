@@ -1,13 +1,13 @@
 package com.example.samplemvc.controller;
 
-import com.example.samplemvc.model.MCVModelImplementor;
+import com.example.samplemvc.model.MVCModelImplementor;
 import com.example.samplemvc.view.AllToDoViewImplementor;
 
 public class MVCShowAllToDoController implements MVCController {
-    MCVModelImplementor mvcModel;
+    MVCModelImplementor mvcModel;
     AllToDoViewImplementor mvcView;
 
-    public MVCShowAllToDoController(MCVModelImplementor mvcModel, AllToDoViewImplementor mvcView){
+    public MVCShowAllToDoController(MVCModelImplementor mvcModel, AllToDoViewImplementor mvcView){
         this.mvcModel = mvcModel;
         this.mvcView = mvcView;
     }

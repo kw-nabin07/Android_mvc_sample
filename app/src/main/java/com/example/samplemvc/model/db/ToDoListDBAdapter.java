@@ -29,10 +29,11 @@ public class ToDoListDBAdapter {
     private static final String COLUMN_DATE="date";
     private static final String COLUMN_TIME="time";
     private static final String COLUMN_NOTICE="notice_status";
+    private static final String COLUMN_NOTIFY_MINUTE="notice_minute";
 
     //create table table_todo(task_id integer primary key, todo text not null);
     private static String CREATE_TABLE_TODO="CREATE TABLE "+TABLE_TODO+"("+COLUMN_TODO_ID+" INTEGER PRIMARY KEY, "+COLUMN_TODO+" TEXT NOT NULL, "+
-            COLUMN_INFO+ " TEXT NOT NULL,"+COLUMN_DATE+" TEXT NOT NULL,"+COLUMN_TIME+" TEXT NOT NULL,"+COLUMN_NOTICE+" INTEGER DEFAULT 0)";
+            COLUMN_INFO+ " TEXT NOT NULL,"+COLUMN_DATE+" TEXT NOT NULL,"+COLUMN_TIME+" TEXT NOT NULL,"+COLUMN_NOTICE+" INTEGER DEFAULT 0,"+COLUMN_NOTIFY_MINUTE+" INTEGER DEFAULT 0)";
 
     private Context context;
     private SQLiteDatabase  sqLliteDatabase;
@@ -52,13 +53,14 @@ public class ToDoListDBAdapter {
     }
 
 
-    public boolean insert(String toDoItem, String details,String date, String time,int notificationStatus){
+    public boolean insert(String toDoItem, String details,String date, String time,int notificationStatus,int setNotifyMinute){
         ContentValues contentValues=new ContentValues();
         contentValues.put(COLUMN_TODO,toDoItem);
         contentValues.put(COLUMN_INFO,details);
         contentValues.put(COLUMN_DATE,date);
         contentValues.put(COLUMN_TIME,time);
         contentValues.put(COLUMN_NOTICE,notificationStatus);
+        contentValues.put(COLUMN_NOTIFY_MINUTE,setNotifyMinute);
 
         return sqLliteDatabase.insert(TABLE_TODO,null,contentValues)>0;
     }
@@ -67,23 +69,23 @@ public class ToDoListDBAdapter {
        return sqLliteDatabase.delete(TABLE_TODO, COLUMN_TODO_ID+" = "+taskId,null)>0;
     }
 
-    public boolean modify(long taskId, String newToDoItem, String newDetails, String newDate, String newTime,int newNotificationStatus){
+    public boolean modify(long taskId, String newToDoItem, String newDetails, String newDate, String newTime,int newNotificationStatus,int noticeMinute){
         ContentValues contentValues=new ContentValues();
         contentValues.put(COLUMN_TODO,newToDoItem);
         contentValues.put(COLUMN_INFO,newDetails);
         contentValues.put(COLUMN_DATE,newDate);
         contentValues.put(COLUMN_TIME,newTime);
         contentValues.put(COLUMN_NOTICE,newNotificationStatus);
-
+        contentValues.put(COLUMN_NOTIFY_MINUTE,noticeMinute);
        return sqLliteDatabase.update(TABLE_TODO,contentValues, COLUMN_TODO_ID+" = "+taskId,null)>0;
     }
 
     public List<ToDo> getAllToDos(){
         List<ToDo> toDoList=new ArrayList<ToDo>();
-        Cursor cursor=sqLliteDatabase.query(TABLE_TODO,new String[]{COLUMN_TODO_ID,COLUMN_TODO, COLUMN_INFO, COLUMN_DATE, COLUMN_TIME, COLUMN_NOTICE},null,null,null,null,null,null);
+        Cursor cursor=sqLliteDatabase.query(TABLE_TODO,new String[]{COLUMN_TODO_ID,COLUMN_TODO, COLUMN_INFO, COLUMN_DATE, COLUMN_TIME, COLUMN_NOTICE,COLUMN_NOTIFY_MINUTE},null,null,null,null,null,null);
         if(cursor!=null &cursor.getCount()>0){
             while(cursor.moveToNext()){
-                ToDo toDo=new ToDo(cursor.getLong(0),cursor.getString(1), cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(5));
+                ToDo toDo=new ToDo(cursor.getLong(0),cursor.getString(1), cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(5),cursor.getInt(6));
                 toDoList.add(toDo);
             }
         }

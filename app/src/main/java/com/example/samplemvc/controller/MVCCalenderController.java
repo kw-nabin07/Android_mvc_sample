@@ -1,17 +1,18 @@
 package com.example.samplemvc.controller;
 
 import com.example.samplemvc.model.MVCModelImplementor;
-import com.example.samplemvc.view.MainActivityViewImplementor;
+import com.example.samplemvc.view.CalenderViewImplementor;
 
+public class MVCCalenderController implements MVCController{
 
-public class MVCMainActivityController implements MVCController{
     MVCModelImplementor mvcModel;
-    MainActivityViewImplementor mvcView;
+    CalenderViewImplementor mvcView;
 
-   public MVCMainActivityController(MVCModelImplementor mvcModel, MainActivityViewImplementor mvcView){
+    public MVCCalenderController(MVCModelImplementor mvcModel, CalenderViewImplementor mvcView){
         this.mvcModel = mvcModel;
         this.mvcView = mvcView;
     }
+
     @Override
     public void onViewLoaded() {
         try{

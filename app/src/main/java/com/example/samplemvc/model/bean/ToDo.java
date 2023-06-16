@@ -8,23 +8,19 @@ public class ToDo {
     private String date;
     private String time;
     private int notificationStatus;
+    private int notificationMinute;
 
+    public ToDo() {
 
-    public ToDo(){
-        super();
     }
-
-    public ToDo(long id, String title){
-        this.id=id;
-        this.title=title;
-    }
-    public ToDo(long id, String title, String details, String date, String time, int notificationStatus) {
+    public ToDo(long id, String title, String details, String date, String time, int notificationStatus, int notificationMinute) {
         this.id = id;
         this.title = title;
         this.details = details;
         this.date = date;
         this.time = time;
         this.notificationStatus = notificationStatus;
+        this.notificationMinute = notificationMinute;
     }
 
     public long getId() {
@@ -73,6 +69,14 @@ public class ToDo {
 
     public void setNotificationStatus(int notificationStatus) {
         this.notificationStatus = notificationStatus;
+    }
+
+    public int getNotificationMinute() {
+        return notificationMinute;
+    }
+
+    public void setNotificationMinute(int notificationMinute) {
+        this.notificationMinute = notificationMinute;
     }
 
     @Override

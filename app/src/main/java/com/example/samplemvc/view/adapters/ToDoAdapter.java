@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.samplemvc.CalenderActivity;
 import com.example.samplemvc.MainActivity;
 import com.example.samplemvc.R;
 import com.example.samplemvc.model.bean.ToDo;
@@ -40,9 +41,6 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewViewHo
         this.context = context;
         this.todos = toDos;
         this.listItemClickListener = listItemClickListener;
-        if (context instanceof MainActivity) {
-               todos = filterByToday();
-        }
         this.todos.sort(new Comparator<ToDo>() {
             @Override
             public int compare(ToDo o1, ToDo o2) {
@@ -51,33 +49,6 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewViewHo
                 return date1.compareTo(date2);
             }
         });
-    }
-    public List<ToDo> filterByToday() {
-        // Get today's date
-        Log.d("ToDoAdapter","filter method called.");
-        // Filter the list by today's date
-        List<ToDo> filteredList = new ArrayList<>();
-        for (ToDo item : todos) {
-            String itemDate = item.getDate();
-            Calendar cal = Calendar.getInstance();
-            int year = cal.get(Calendar.YEAR);
-            int month = cal.get(Calendar.MONTH);
-            int day = cal.get(Calendar.DAY_OF_MONTH);
-            String dateStr = null;
-            String today_date = year + "-"+(month+1)+"-"+day;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            try{
-                Date dateInput = sdf.parse(today_date);
-                SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-                dateStr = sdfDate.format(dateInput);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            if (itemDate.equals(dateStr)) {
-                filteredList.add(item);
-            }
-        }
-        return filteredList;
     }
     @Override
     public ToDoViewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

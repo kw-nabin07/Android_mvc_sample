@@ -7,12 +7,12 @@ import com.example.samplemvc.model.db.ToDoListDBAdapter;
 
 import java.util.List;
 
-public class MCVModelImplementor implements MVCModel {
+public class MVCModelImplementor implements MVCModel {
     ToDoListDBAdapter toDoListDBAdapter;
 
     List<ToDo> toDoItems;
 
-    public MCVModelImplementor(ToDoListDBAdapter toDoListDBAdapter){
+    public MVCModelImplementor(ToDoListDBAdapter toDoListDBAdapter){
         this.toDoListDBAdapter = toDoListDBAdapter;
         toDoItems = this.toDoListDBAdapter.getAllToDos();
     }
@@ -28,8 +28,8 @@ public class MCVModelImplementor implements MVCModel {
     }
 
     @Override
-    public boolean addToDoItem(String toDoItem, String details, String date, String time,int notificationStatus) throws Exception{
-        boolean addSuccess = toDoListDBAdapter.insert(toDoItem, details, date, time, notificationStatus);
+    public boolean addToDoItem(String toDoItem, String details, String date, String time,int notificationStatus,int setNotifyMinute) throws Exception{
+        boolean addSuccess = toDoListDBAdapter.insert(toDoItem, details, date, time, notificationStatus,setNotifyMinute);
         if (addSuccess){
             refresh();
         }else{
@@ -52,8 +52,8 @@ public class MCVModelImplementor implements MVCModel {
     }
 
     @Override
-    public boolean modifyToDoItem(long id, String newToDoValue,String newDetailsValue,String newDateValue,String newTimeValue,int newNotificationStatus) throws Exception{
-        boolean modifySuccess = toDoListDBAdapter.modify(id,newToDoValue,newDetailsValue,newDateValue,newTimeValue,newNotificationStatus);
+    public boolean modifyToDoItem(long id, String newToDoValue,String newDetailsValue,String newDateValue,String newTimeValue,int newNotificationStatus,int noticeMinute) throws Exception{
+        boolean modifySuccess = toDoListDBAdapter.modify(id,newToDoValue,newDetailsValue,newDateValue,newTimeValue,newNotificationStatus,noticeMinute);
         if(modifySuccess){
             refresh();
         } else{

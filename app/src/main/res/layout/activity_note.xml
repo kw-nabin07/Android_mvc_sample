@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="メモ帳"
         android:textStyle="bold"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="5sp"
         android:textColor="@color/teal_700"
         android:gravity="center"
         android:textSize="26sp">

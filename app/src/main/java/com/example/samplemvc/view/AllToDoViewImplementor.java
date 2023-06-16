@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.samplemvc.DataManipulationActivity;
 import com.example.samplemvc.R;
 import com.example.samplemvc.controller.MVCShowAllToDoController;
-import com.example.samplemvc.model.MCVModelImplementor;
+import com.example.samplemvc.model.MVCModelImplementor;
 import com.example.samplemvc.model.bean.ToDo;
 import com.example.samplemvc.model.db.ToDoListDBAdapter;
 import com.example.samplemvc.view.adapters.ToDoAdapter;
@@ -24,20 +24,20 @@ import java.util.List;
 public class AllToDoViewImplementor implements MVCShowAllTodoActivityView, ToDoAdapter.ListItemClickListener {
     View rootView;
     MVCShowAllToDoController mvcShowAllToDoController;
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView_allToDos;
     ToDoAdapter toDoAdapter;
 
     public AllToDoViewImplementor(Context context, ViewGroup container){
         rootView = LayoutInflater.from(context).inflate(R.layout.activity_show_all_to_do,container);
-        MCVModelImplementor mvcModel = new MCVModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
+        MVCModelImplementor mvcModel = new MVCModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
         mvcShowAllToDoController = new MVCShowAllToDoController(mvcModel, this);
     }
 
     @Override
     public void initViews() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(rootView.getContext());
-        recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerListViewToDos);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView_allToDos = (RecyclerView)rootView.findViewById(R.id.toDos_all);
+        recyclerView_allToDos.setLayoutManager(linearLayoutManager);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class AllToDoViewImplementor implements MVCShowAllTodoActivityView, ToDoA
     @Override
     public void showAllToDos(List<ToDo> toDoList) {
         toDoAdapter = new ToDoAdapter(rootView.getContext(),toDoList, this);
-        recyclerView.setAdapter(toDoAdapter);
+        recyclerView_allToDos.setAdapter(toDoAdapter);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class AllToDoViewImplementor implements MVCShowAllTodoActivityView, ToDoA
 
     private void clearListView(){
         toDoAdapter = new ToDoAdapter(rootView.getContext(), new ArrayList<ToDo>(), this);
-        recyclerView.setAdapter(toDoAdapter);
+        recyclerView_allToDos.setAdapter(toDoAdapter);
     }
     @Override
     public  void navigateToDataManipulationActivity(long id){

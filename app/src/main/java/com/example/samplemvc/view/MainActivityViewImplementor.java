@@ -3,6 +3,7 @@ package com.example.samplemvc.view;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.samplemvc.CalenderViewActivity;
+import com.example.samplemvc.CalenderActivity;
 import com.example.samplemvc.DataManipulationActivity;
 import com.example.samplemvc.NoteActivity;
 import com.example.samplemvc.NotificationActivity;
@@ -21,7 +22,7 @@ import com.example.samplemvc.R;
 import com.example.samplemvc.ShowAllToDoActivity;
 import com.example.samplemvc.TodoRegisterActivity;
 import com.example.samplemvc.controller.MVCMainActivityController;
-import com.example.samplemvc.model.MCVModelImplementor;
+import com.example.samplemvc.model.MVCModelImplementor;
 import com.example.samplemvc.model.bean.ToDo;
 import com.example.samplemvc.model.db.ToDoListDBAdapter;
 import com.example.samplemvc.view.adapters.ToDoAdapter;
@@ -30,6 +31,7 @@ import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -41,11 +43,11 @@ public class MainActivityViewImplementor implements MVCShowAllTodoActivityView,T
     private RecyclerView today_event;
 
     ToDoAdapter toDoAdapter;
-
+    List<ToDo> allToDoList = new ArrayList<>();
 
     public MainActivityViewImplementor (Context context, ViewGroup container){
         rootView = LayoutInflater.from(context).inflate(R.layout.activity_main,container);
-        MCVModelImplementor mvcModel = new MCVModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
+        MVCModelImplementor mvcModel = new MVCModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
         mvcMainActivityController = new MVCMainActivityController(mvcModel, this);
     }
     @Override
@@ -54,41 +56,33 @@ public class MainActivityViewImplementor implements MVCShowAllTodoActivityView,T
         TextView time_now = (TextView) rootView.findViewById(R.id.time_now);
         TextView today_day = (TextView) rootView.findViewById(R.id.today_day);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(rootView.getContext());
-        today_event = (RecyclerView) rootView.findViewById(R.id.recyclerListViewToDosToday);
+        today_event = (RecyclerView) rootView.findViewById(R.id.toDos_Today);
         today_event.setLayoutManager(linearLayoutManager);
 
-        ImageButton buttonAddToDo = (ImageButton) rootView.findViewById(R.id.AddToDoBtn);
-        ImageButton buttonViewToDo = (ImageButton) rootView.findViewById(R.id.EventListBtn);
-        ImageButton calenderBtn = (ImageButton) rootView.findViewById(R.id.calenderBtn);
+        ImageButton addToDoBtn = (ImageButton) rootView.findViewById(R.id.addToDoBtn);
+        ImageButton viewToDoBtn = (ImageButton) rootView.findViewById(R.id.eventListBtn);
+        ImageButton calenderViewBtn = (ImageButton) rootView.findViewById(R.id.calenderBtn);
         ImageButton noteBtn = (ImageButton) rootView.findViewById(R.id.noteBtn);
         ImageButton notificationBtn = (ImageButton) rootView.findViewById(R.id.notificationBtn);
 
-
-        buttonViewToDo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(rootView.getContext(), ShowAllToDoActivity.class);
-                rootView.getContext().startActivity(intent);
-            }
-        });
-        buttonAddToDo.setOnClickListener(new View.OnClickListener() {
+        addToDoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(rootView.getContext(), TodoRegisterActivity.class);
                 rootView.getContext().startActivity(intent);
             }
         });
-        calenderBtn.setOnClickListener(new View.OnClickListener() {
+        viewToDoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(rootView.getContext(), CalenderViewActivity.class);
+                Intent intent = new Intent(rootView.getContext(), ShowAllToDoActivity.class);
                 rootView.getContext().startActivity(intent);
             }
         });
-        notificationBtn.setOnClickListener(new View.OnClickListener() {
+        calenderViewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(rootView.getContext(), NotificationActivity.class);
+                Intent intent = new Intent(rootView.getContext(), CalenderActivity.class);
                 rootView.getContext().startActivity(intent);
             }
         });
@@ -99,37 +93,43 @@ public class MainActivityViewImplementor implements MVCShowAllTodoActivityView,T
                 rootView.getContext().startActivity(intent);
             }
         });
-
-        Thread thread = new Thread(new Runnable(){
-            int lastMinute;
-            int currentMinute,currentDay;
+        notificationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run()
-            {
-                lastMinute = currentMinute;
-                while (true)
-                {
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(System.currentTimeMillis());
-                    currentMinute = calendar.get(Calendar.MINUTE);
-                    currentDay = calendar.get(Calendar.DAY_OF_WEEK);
-                    if (currentMinute != lastMinute){
-                        lastMinute = currentMinute;
-                        Locale jp = new Locale("ja", "JP", "JP");
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日",jp);
-                        today_date.setText(sdf.format(calendar.getTime()));
-                        today_day.setText(getTodayDay(currentDay));
-                        if(currentDay == 1 || currentDay == 7){
-                            today_date.setTextColor(Color.parseColor("#E83E31"));
-                            today_day.setTextColor(Color.parseColor("#E83E31"));
-                        }
-                        SimpleDateFormat sdf_time = new SimpleDateFormat("KK:mm a",jp);
-                        time_now.setText(sdf_time.format(calendar.getTime()));
-                    }
-                }
+            public void onClick(View v) {
+                Intent intent = new Intent(rootView.getContext(), NotificationActivity.class);
+                rootView.getContext().startActivity(intent);
             }
         });
-        thread.start();
+//            Thread thread = new Thread(new Runnable(){
+//            int lastMinute;
+//            int currentMinute,currentDay;
+//            @Override
+//            public void run()
+//            {
+//                lastMinute = currentMinute;
+//                while (true)
+//                {
+//                    Calendar calendar = Calendar.getInstance();
+//                    calendar.setTimeInMillis(System.currentTimeMillis());
+//                    currentMinute = calendar.get(Calendar.MINUTE);
+//                    currentDay = calendar.get(Calendar.DAY_OF_WEEK);
+//                    if (currentMinute != lastMinute){
+//                        lastMinute = currentMinute;
+//                        Locale jp = new Locale("ja", "JP", "JP");
+//                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日",jp);
+//                        today_date.setText(sdf.format(calendar.getTime()));
+//                        today_day.setText(getTodayDay(currentDay));
+//                        if(currentDay == 1 || currentDay == 7){
+//                            today_date.setTextColor(Color.parseColor("#E83E31"));
+//                            today_day.setTextColor(Color.parseColor("#E83E31"));
+//                        }
+//                        SimpleDateFormat sdf_time = new SimpleDateFormat("KK:mm a",jp);
+//                        time_now.setText(sdf_time.format(calendar.getTime()));
+//                    }
+//                }
+//            }
+//        });
+//        thread.start();
     }
 
     String getTodayDay(int day){
@@ -152,7 +152,6 @@ public class MainActivityViewImplementor implements MVCShowAllTodoActivityView,T
         return strToday;
     }
 
-
     @Override
     public void bindDataToView() {
      mvcMainActivityController.onViewLoaded();
@@ -165,7 +164,8 @@ public class MainActivityViewImplementor implements MVCShowAllTodoActivityView,T
 
     @Override
     public void showAllToDos(List<ToDo> toDoList) {
-        toDoAdapter = new ToDoAdapter(rootView.getContext(),toDoList, this);
+        this.allToDoList = toDoList;
+        toDoAdapter = new ToDoAdapter(rootView.getContext(),filterByToday(toDoList), this);
         today_event.setAdapter(toDoAdapter);
     }
 
@@ -177,7 +177,7 @@ public class MainActivityViewImplementor implements MVCShowAllTodoActivityView,T
         Toast.makeText(rootView.getContext(),errorMessage, Toast.LENGTH_LONG).show();
     }
     private void clearListView(){
-        toDoAdapter = new ToDoAdapter(rootView.getContext(), new ArrayList<ToDo>(), this);
+        toDoAdapter = new ToDoAdapter(rootView.getContext(), new ArrayList<>(), this);
         today_event.setAdapter(toDoAdapter);
     }
 
@@ -191,5 +191,32 @@ public class MainActivityViewImplementor implements MVCShowAllTodoActivityView,T
     @Override
     public void onItemClicked(long position) {
         mvcMainActivityController.onToDoItemSelected(position);
+    }
+    public List<ToDo> filterByToday(List<ToDo> todos) {
+        // Get today's date
+        Log.d("ToDoAdapter","filter method called.");
+        // Filter the list by today's date
+        List<ToDo> filteredList = new ArrayList<>();
+        for (ToDo item : todos) {
+            String itemDate = item.getDate();
+            Calendar cal = Calendar.getInstance();
+            int year = cal.get(Calendar.YEAR);
+            int month = cal.get(Calendar.MONTH);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+            String dateStr = null;
+            String today_date = year + "-"+(month+1)+"-"+day;
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try{
+                Date dateInput = sdf.parse(today_date);
+                SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+                dateStr = sdfDate.format(dateInput);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            if (itemDate.equals(dateStr)) {
+                filteredList.add(item);
+            }
+        }
+        return filteredList;
     }
 }

@@ -34,17 +34,17 @@ public class NotificationHelper {
                 for(ToDo todos : notificationTodos){
                     int notificationStatus = todos.getNotificationStatus();
                     int notificationId = (int)todos.getId();
-                    String title = todos.getTitle();
+                    String title = todos.getDetails();
+                    long notifyMinute = (long)todos.getNotificationMinute();
                     Date date = getDate(todos.getDate(),todos.getTime());
                     Calendar calendar = Calendar.getInstance();
-                    //30分以上のタスクのみ通知設定するため
-                    long nowDate = (calendar.getTimeInMillis() + 30 * 60 * 1000);
+                    long nowDate = (calendar.getTimeInMillis() + notifyMinute * 60 * 1000);
                     calendar.setTime(date);
                     long itemDate = calendar.getTimeInMillis();
                     if(notificationStatus == 1 && nowDate < itemDate){
-                        notificationForComingTask(context,notificationId,itemDate,title);
+                        notificationForComingTask(context,notificationId,itemDate,title,notifyMinute);
                     }else {
-                        Log.d(TAG,"通知設定しているタスクがございません。");
+                        Log.d(TAG,"通知設定OFF");
                     }
                 }
             }catch (Exception e){
@@ -52,21 +52,20 @@ public class NotificationHelper {
             }
     }
     //今後のタスクの通知設定
-    private static void notificationForComingTask(Context context,int notificationId, Long notificationTime,String title){
-        Log.d(TAG,"notificationForComingTask.今後のタスクの通知設定");
+    private static void notificationForComingTask(Context context,int notificationId, Long notificationTime,String title,long notifyMinute){
+        Log.d(TAG,"notificationForComingTask.今後のタスクの通知設定 "+notifyMinute);
         // Create a pending intent to launch the notification when the alarm goes off
         Intent intent = new Intent(context, NotificationReceiver.class);
-        intent.putExtra("message", "今後のタスク："+title);
+        intent.putExtra("message", title);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, notificationId, intent,PendingIntent.FLAG_IMMUTABLE);
         // Get the alarm manager service
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         // Set the alarm to go off at the given date and time
-
-        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, (notificationTime - 30 * 60 * 1000), pendingIntent);
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, (notificationTime - notifyMinute * 60 * 1000), pendingIntent);
         // Create a notification channel for the notification
         createNotificationChannel(context);
     }
-
+     //date format convert
     public static Date getDate(String date, String time){
         Date formattedDate=null;
         String formattedTime = null;
@@ -87,7 +86,7 @@ public class NotificationHelper {
         }
         return formattedDate;
     }
-
+    //channel create for notification
     static void createNotificationChannel(Context context) {
         if (Build.VERSION_CODES.O <= Build.VERSION.SDK_INT) {
             NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);

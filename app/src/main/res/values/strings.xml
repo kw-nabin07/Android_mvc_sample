@@ -12,4 +12,13 @@
     <string name="dayHint">Day</string>
     <string name="today_s_dateHint">Today\'s date</string>
     <string name="todoDes">TODO</string>
+    <string name="addbutton">addButton</string>
+    <string name="listtodo">listTOdo</string>
+    <string name="listTodo">ListView</string>
+    <string name="calenderButton">calenderButton</string>
+    <string name="cal">カレンダー</string>
+    <string name="feb_2021">Feb 2021</string>
+    <string name="_3">3月</string>
+    <string name="_4">4月</string>
+    <string name="on_off">通知 ON/OFF</string>
 </resources>
