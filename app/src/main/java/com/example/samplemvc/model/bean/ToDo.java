@@ -3,24 +3,25 @@ package com.example.samplemvc.model.bean;
 public class ToDo {
 
     private long id;
-    private String toDo;
-    private String place;
+    private String title;
+    private String details;
+    private String date;
+    private String time;
+    private int notificationStatus;
+    private int notificationMinute;
 
-    public ToDo(){
-        super();
+    public ToDo() {
+
     }
-
-    public ToDo(long id, String toDo){
-        this.id=id;
-        this.toDo=toDo;
+    public ToDo(long id, String title, String details, String date, String time, int notificationStatus, int notificationMinute) {
+        this.id = id;
+        this.title = title;
+        this.details = details;
+        this.date = date;
+        this.time = time;
+        this.notificationStatus = notificationStatus;
+        this.notificationMinute = notificationMinute;
     }
-
-    public ToDo(long id, String toDo, String place){
-        this.id=id;
-        this.toDo=toDo;
-        this.place=place;
-    }
-
 
     public long getId() {
         return id;
@@ -30,25 +31,57 @@ public class ToDo {
         this.id = id;
     }
 
-    public String getToDo() {
-        return toDo;
+    public String getTitle() {
+        return title;
     }
 
-    public void setToDo(String toDo) {
-        this.toDo = toDo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getPlace() {
-        return place;
+    public String getDetails() {
+        return details;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public int getNotificationStatus() {
+        return notificationStatus;
+    }
+
+    public void setNotificationStatus(int notificationStatus) {
+        this.notificationStatus = notificationStatus;
+    }
+
+    public int getNotificationMinute() {
+        return notificationMinute;
+    }
+
+    public void setNotificationMinute(int notificationMinute) {
+        this.notificationMinute = notificationMinute;
     }
 
     @Override
     public String toString() {
-        return "("+ id+", "+toDo+", "+place+")";
+        return "("+ id+", "+title+", "+details+")";
     }
 
     @Override

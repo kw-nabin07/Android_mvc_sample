@@ -7,13 +7,12 @@ import com.example.samplemvc.model.db.ToDoListDBAdapter;
 
 import java.util.List;
 
-public class MCVModelImplementor implements MVCModel {
-
+public class MVCModelImplementor implements MVCModel {
     ToDoListDBAdapter toDoListDBAdapter;
 
     List<ToDo> toDoItems;
 
-    public MCVModelImplementor(ToDoListDBAdapter toDoListDBAdapter){
+    public MVCModelImplementor(ToDoListDBAdapter toDoListDBAdapter){
         this.toDoListDBAdapter = toDoListDBAdapter;
         toDoItems = this.toDoListDBAdapter.getAllToDos();
     }
@@ -29,8 +28,8 @@ public class MCVModelImplementor implements MVCModel {
     }
 
     @Override
-    public boolean addToDoItem(String toDoItem, String place) throws Exception{
-        boolean addSuccess = toDoListDBAdapter.insert(toDoItem, place);
+    public boolean addToDoItem(String toDoItem, String details, String date, String time,int notificationStatus,int setNotifyMinute) throws Exception{
+        boolean addSuccess = toDoListDBAdapter.insert(toDoItem, details, date, time, notificationStatus,setNotifyMinute);
         if (addSuccess){
             refresh();
         }else{
@@ -42,24 +41,23 @@ public class MCVModelImplementor implements MVCModel {
 
     @Override
     public boolean removeToDoItem(long id) throws Exception{
-
         boolean deleteSuccess = toDoListDBAdapter.delete(id);
         if(deleteSuccess){
             refresh();
         }else{
-            throw new ToDoNotFoundException("Id is wrong");
+            throw new ToDoNotFoundException("Id is wrong in remove");
         }
         return deleteSuccess;
 
     }
 
     @Override
-    public boolean modifyToDoItem(long id, String newToDoValuel,String newAddressValue) throws Exception{
-        boolean modifySuccess = toDoListDBAdapter.modify(id,newToDoValuel,newAddressValue);
+    public boolean modifyToDoItem(long id, String newToDoValue,String newDetailsValue,String newDateValue,String newTimeValue,int newNotificationStatus,int noticeMinute) throws Exception{
+        boolean modifySuccess = toDoListDBAdapter.modify(id,newToDoValue,newDetailsValue,newDateValue,newTimeValue,newNotificationStatus,noticeMinute);
         if(modifySuccess){
             refresh();
         } else{
-            throw new ToDoNotFoundException("Id is wrong");
+            throw new ToDoNotFoundException("Id is wrong in db");
         }
         return modifySuccess;
     }
@@ -73,15 +71,13 @@ public class MCVModelImplementor implements MVCModel {
             }
         }
         if(toDo==null){
-            throw new ToDoNotFoundException("Id is wrong");
+            throw new ToDoNotFoundException("Id is wrong in get todo");
         }
         return toDo;
     }
-
     private void refresh(){
         toDoItems.clear();
         toDoItems = this.toDoListDBAdapter.getAllToDos();
     }
-
 
 }

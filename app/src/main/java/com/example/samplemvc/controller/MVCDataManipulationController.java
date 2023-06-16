@@ -1,15 +1,21 @@
 package com.example.samplemvc.controller;
 
 
-import com.example.samplemvc.model.MCVModelImplementor;
+import android.content.Context;
+
+import com.example.samplemvc.NotificationHelper;
+import com.example.samplemvc.model.MVCModelImplementor;
+import com.example.samplemvc.model.bean.ToDo;
 import com.example.samplemvc.view.DataManipulatorViewImplementor;
+
+import java.util.List;
 
 public class MVCDataManipulationController implements MVCController{
 
-    MCVModelImplementor mvcModel;
+    MVCModelImplementor mvcModel;
     DataManipulatorViewImplementor mvcView;
 
-    public MVCDataManipulationController(MCVModelImplementor mvcModel, DataManipulatorViewImplementor mvcView){
+    public MVCDataManipulationController(MVCModelImplementor mvcModel, DataManipulatorViewImplementor mvcView){
         this.mvcModel = mvcModel;
         this.mvcView = mvcView;
     }
@@ -19,10 +25,12 @@ public class MVCDataManipulationController implements MVCController{
         mvcView.showSelectedToDo();
     }
 
-    public void onRemoveBottonClicked(long id){
+    public void onRemoveButtonClicked(Context context,long id){
        try{
            boolean success = mvcModel.removeToDoItem(id);
            if(success){
+               List<ToDo> toDoList = mvcModel.getAllToDos();
+               NotificationHelper.scheduleNotification(context, toDoList);
                mvcView.updateViewOnRemove();
            }
        }catch (Exception e){
@@ -31,11 +39,14 @@ public class MVCDataManipulationController implements MVCController{
 
    }
 
-   public void onModifyButtonClicked(long id, String newTODo,String newAddress){
+   public void onModifyButtonClicked(Context context,long id, String newTODo, String newDetails, String newDate, String newTime, int notificationStatus,int noticeMinute){
        try{
-           boolean success = mvcModel.modifyToDoItem(id,newTODo,newAddress);
+           boolean success = mvcModel.modifyToDoItem(id,newTODo,newDetails,newDate,newTime,notificationStatus,noticeMinute);
            if(success){
-               mvcView.updateViewOnModify(mvcModel.getToDo(id));
+               mvcView.updateViewOnModify();
+               List<ToDo> toDoList1 = mvcModel.getAllToDos();
+               NotificationHelper.scheduleNotification(context, toDoList1);
+
            }
        }catch (Exception e){
            mvcView.showErrorToast(e.getMessage());
