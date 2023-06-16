@@ -5,11 +5,9 @@ import static com.example.samplemvc.view.MVCViewFactory.getMVCView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.samplemvc.model.bean.ToDo;
 import com.example.samplemvc.view.MVCView;
 import com.example.samplemvc.view.MVCViewFactory;
 
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     MVCView mvcView;
