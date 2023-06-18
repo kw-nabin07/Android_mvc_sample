@@ -10,7 +10,7 @@
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:headerColor="#1C2833"
+        app:headerColor="#2196F3"
         />
 
     <androidx.recyclerview.widget.RecyclerView

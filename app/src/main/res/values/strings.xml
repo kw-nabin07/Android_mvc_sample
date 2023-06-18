@@ -7,7 +7,7 @@
     <string name="todoDescription">TODO</string>
     <string name="txtNotice">通知</string>
     <string name="txtSchedule">Schedule</string>
-    <string name="txtScheduleTitle">本日のスケジュール</string>
+    <string name="txtScheduleTitle">本日のタスク</string>
     <string name="timeHint">Time</string>
     <string name="dayHint">Day</string>
     <string name="today_s_dateHint">Today\'s date</string>
@@ -21,4 +21,14 @@
     <string name="_3">3月</string>
     <string name="_4">4月</string>
     <string name="on_off">通知 ON/OFF</string>
+    <string name="settings">設定</string>
+    <string name="_5">5分前</string>
+    <string name="_15">15分前</string>
+    <string name="title">件名</string>
+    <string name="detail">詳細</string>
+    <string name="date">Date</string>
+    <string name="hiduke">日付</string>
+    <string name="time">Time</string>
+    <string name="time1">時間</string>
+    <string name="save">保存</string>
 </resources>

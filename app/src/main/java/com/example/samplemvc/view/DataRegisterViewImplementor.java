@@ -172,17 +172,19 @@ public class DataRegisterViewImplementor implements MVCRegisterActivityView{
                 String time = text_time.getText().toString();
                 if (todo.equals("") || info.equals("") || date.equals("") || time.equals("")){
                     Toast.makeText(rootView.getContext(),"Need to set all info.", Toast.LENGTH_LONG).show();
+                }else{
+                    int notificationStatus;
+                    if (setNotificationShowTime == 0){
+                        setNotificationShowTime = 15;
+                    }
+                    if(notice_status){
+                        notificationStatus = 1;
+                    }else {
+                        notificationStatus = 0;
+                    }
+                    mvcDataRegisterController.onAddButtonClicked(rootView.getContext(),todo, info, date, time,notificationStatus,setNotificationShowTime);
                 }
-                int notificationStatus;
-                if (setNotificationShowTime == 0){
-                    setNotificationShowTime = 15;
-                }
-                if(notice_status){
-                    notificationStatus = 1;
-                }else {
-                    notificationStatus = 0;
-                }
-                mvcDataRegisterController.onAddButtonClicked(rootView.getContext(),todo, info, date, time,notificationStatus,setNotificationShowTime);
+
 
             }
         });

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.samplemvc.CalenderActivity;
 import com.example.samplemvc.DataManipulationActivity;
 import com.example.samplemvc.NoteActivity;
-import com.example.samplemvc.NotificationActivity;
+import com.example.samplemvc.SettingActivity;
 import com.example.samplemvc.R;
 import com.example.samplemvc.ShowAllToDoActivity;
 import com.example.samplemvc.TodoRegisterActivity;
@@ -96,7 +96,7 @@ public class MainActivityViewImplementor implements MVCShowAllTodoActivityView,T
         notificationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(rootView.getContext(), NotificationActivity.class);
+                Intent intent = new Intent(rootView.getContext(), SettingActivity.class);
                 rootView.getContext().startActivity(intent);
             }
         });
