@@ -43,6 +43,7 @@
             android:layout_gravity="right"
             android:text="日付"
             android:textSize="18sp"
+            android:backgroundTint="#DD4E15"
             android:layout_marginStart="10sp"
             android:textColor="@color/white"
             >
@@ -68,6 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:text="時間"
+            android:backgroundTint="#DD4E15"
             android:textSize="18sp"
             android:layout_marginLeft="10sp"
             android:textColor="@color/white"
@@ -132,6 +134,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="保存"
+        android:backgroundTint="#058826"
         android:textSize="18sp"
         android:layout_marginTop="20sp"
         android:id="@+id/buttonModifyToDo"

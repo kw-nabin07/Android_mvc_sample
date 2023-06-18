@@ -7,12 +7,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.applandeo.materialcalendarview.CalendarDay;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnCalendarPageChangeListener;
@@ -31,6 +34,7 @@ import java.util.Calendar;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class CalenderViewImplementor implements MVCShowAllTodoActivityView,ToDoAdapter.ListItemClickListener{
     CalendarView calendarView;
@@ -38,15 +42,11 @@ public class CalenderViewImplementor implements MVCShowAllTodoActivityView,ToDoA
     private static final String TAG = "CalenderViewImplementor";
     View rootView;
     MVCCalenderController mvcCalenderController;
-    MVCModelImplementor mvcModel;
     private RecyclerView todoBySelected_date;
-    int thisYear;
-    int thisMonth;
     List<ToDo> allTodos;
-
     public CalenderViewImplementor(Context context, ViewGroup container) {
         rootView = LayoutInflater.from(context).inflate(R.layout.activity_calender, container);
-        mvcModel = new MVCModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
+        MVCModelImplementor mvcModel = new MVCModelImplementor(ToDoListDBAdapter.getToDoListDBAdapterInstance(context));
         mvcCalenderController = new MVCCalenderController(mvcModel, this);
     }
     @Override
@@ -56,60 +56,35 @@ public class CalenderViewImplementor implements MVCShowAllTodoActivityView,ToDoA
         todoBySelected_date = (RecyclerView)rootView.findViewById(R.id.toDos_bySelected_date);
         todoBySelected_date.setLayoutManager(linearLayoutManager);
         //get selected date event
-        calendarView.setOnDayClickListener(new OnDayClickListener() {
-            @Override
-            public void onDayClick(EventDay eventDay) {
-                Calendar clickedDayCalendar = eventDay.getCalendar();
-                int year = clickedDayCalendar.get(Calendar.YEAR);
-                int month = clickedDayCalendar.get(Calendar.MONTH);
-                int day = clickedDayCalendar.get(Calendar.DAY_OF_MONTH);
-                String today_date = year + "-"+(month+1)+"-"+day;
-                try {
-                    filterBySelectedDate(today_date);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
+        calendarView.setOnDayClickListener(eventDay -> {
+            Calendar clickedDayCalendar = eventDay.getCalendar();
+            Calendar selectedDate = Calendar.getInstance();
+            selectedDate.set(Calendar.YEAR,clickedDayCalendar.get(Calendar.YEAR));
+            selectedDate.set(Calendar.MONTH,clickedDayCalendar.get(Calendar.MONTH));
+            selectedDate.set(Calendar.DATE,clickedDayCalendar.get(Calendar.DAY_OF_MONTH));
+            filterBySelectedDate(selectedDate);
         });
         //get next month event
         Calendar cal1 = Calendar.getInstance();
-        final int[] year = {cal1.get(Calendar.YEAR)};
-        calendarView.setOnForwardPageChangeListener(new OnCalendarPageChangeListener() {
-            @Override
-            public void onChange() {
-                Calendar cal = calendarView.getCurrentPageDate();
-                int month = cal.get(Calendar.MONTH) + 1;
-                if(month == 1){
-                    year[0] = year[0] + 1;
-                }
-                thisYear = year[0];
-                thisMonth = month;
-                try {
-                    filterByMonth(thisYear,thisMonth);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-                Log.d("eventDate",(Integer.toString(month)+","+Integer.toString(year[0])));
+        calendarView.setOnForwardPageChangeListener(() -> {
+            Calendar cal = calendarView.getCurrentPageDate();
+            int month = cal.get(Calendar.MONTH) + 1;
+            int year = cal1.get(Calendar.YEAR);
+            if(month == 1){
+               year = year + 1;
             }
+            filterByMonth(year,month);
+
         });
         //get previous month event
-        calendarView.setOnPreviousPageChangeListener(new OnCalendarPageChangeListener() {
-            @Override
-            public void onChange() {
-                Calendar cal = calendarView.getCurrentPageDate();
-                int month = cal.get(Calendar.MONTH) + 1;
-                if(month == 12){
-                    year[0] -= 1;
-                }
-                thisYear = year[0];
-                thisMonth = month;
-                try {
-                    filterByMonth(thisYear,thisMonth);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-                Log.d("eventDate",(Integer.toString(month)+","+Integer.toString(year[0])));
+        calendarView.setOnPreviousPageChangeListener(() -> {
+            Calendar cal = calendarView.getCurrentPageDate();
+            int month = cal.get(Calendar.MONTH) + 1;
+            int year = cal1.get(Calendar.YEAR);
+            if(month == 12){
+                year = year + 1;
             }
+            filterByMonth(year,month);
         });
 
     }
@@ -126,8 +101,10 @@ public class CalenderViewImplementor implements MVCShowAllTodoActivityView,ToDoA
     @Override
     public void showAllToDos(List<ToDo> toDoList) {
         allTodos = toDoList;
-        toDoAdapter = new ToDoAdapter(rootView.getContext(),filterByToday(toDoList), this);
-        todoBySelected_date.setAdapter(toDoAdapter);
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH)+1;
+        filterByMonth(year,month);
         //set Event
         setEventIcon(toDoList);
     }
@@ -142,7 +119,6 @@ public class CalenderViewImplementor implements MVCShowAllTodoActivityView,ToDoA
         toDoAdapter = new ToDoAdapter(rootView.getContext(), new ArrayList<>(), this);
         todoBySelected_date.setAdapter(toDoAdapter);
     }
-
     @Override
     public void navigateToDataManipulationActivity(long id) {
         Intent intent = new Intent(rootView.getContext(), DataManipulationActivity.class);
@@ -173,69 +149,22 @@ public class CalenderViewImplementor implements MVCShowAllTodoActivityView,ToDoA
                 events.add(new EventDay(cal[i], R.drawable.outline_event_available_24));
             }
             calendarView.setEvents(events);
-
-        }else{
-            Log.d("eventDate","EMPTY EVENT DATE");
         }
     }
-    public List<ToDo> filterByToday(List<ToDo>todos) {
-        // Get today's date
-        Log.d("ToDoAdapter","filter method called.");
-        // Filter the list by today's date
+    public void filterBySelectedDate(Calendar selectedDate) {
         List<ToDo> filteredList = new ArrayList<>();
-        for (ToDo item : todos) {
+        for (ToDo item : allTodos) {
             String itemDate = item.getDate();
-            Calendar cal = Calendar.getInstance();
-            int year = cal.get(Calendar.YEAR);
-            int month = cal.get(Calendar.MONTH);
-            int day = cal.get(Calendar.DAY_OF_MONTH);
-            String dateStr = null;
-            String today_date = year + "-"+(month+1)+"-"+day;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            try{
-                Date dateInput = sdf.parse(today_date);
-                SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-                dateStr = sdfDate.format(dateInput);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            if (itemDate.equals(dateStr)) {
+            if(compareCalender(itemDate,selectedDate)){
                 filteredList.add(item);
+            }else {
+                Log.d(TAG,"");
             }
-        }
-        return filteredList;
+         }
+        setAdapter(filteredList);
     }
-    public void filterBySelectedDate(String selectedDate) throws Exception {
-        // Get today's date
-        Log.d("ToDoAdapter","filter method called.");
-        // Filter the list by today's date
+    public void filterByMonth(int thisYear,int thisMonth){
         List<ToDo> filteredList = new ArrayList<>();
-        List<ToDo> allTodos = getAllData();
-          for (ToDo item : allTodos) {
-                String itemDate = item.getDate();
-                String dateStr = null;
-                String today_date = selectedDate;
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                try{
-                    Date dateInput = sdf.parse(today_date);
-                    SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-                    dateStr = sdfDate.format(dateInput);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                if (itemDate.equals(dateStr)) {
-                    filteredList.add(item);
-                }
-            }
-            toDoAdapter = new ToDoAdapter(rootView.getContext(),filteredList, this);
-            todoBySelected_date.setAdapter(toDoAdapter);
-    }
-    public void filterByMonth(int thisYear,int thisMonth) throws Exception {
-        // Get today's date
-        Log.d("ToDoAdapter","filter method called.");
-        // Filter the list by today's date
-        List<ToDo> filteredList = new ArrayList<>();
-        List<ToDo> allTodos = getAllData();
         for (ToDo item : allTodos) {
             String itemDate = item.getDate();
             String[] monthYear = itemDate.split("-");
@@ -245,17 +174,23 @@ public class CalenderViewImplementor implements MVCShowAllTodoActivityView,ToDoA
                 }
             }
         }
+       setAdapter(filteredList);
+    }
+    boolean compareCalender(String itemDate,Calendar cal1){
+        String[] date = itemDate.split("-");
+        Calendar cal2 = Calendar.getInstance();
+        cal2.set(Calendar.YEAR,Integer.parseInt(date[0]));
+        cal2.set(Calendar.MONTH,Integer.parseInt(date[1]) -1);
+        cal2.set(Calendar.DAY_OF_MONTH,Integer.parseInt(date[2]));
+        if (Objects.equals(cal1, cal2)) {
+            return true;
+        }else {
+          return false;
+        }
+    }
+    public void setAdapter(List<ToDo>filteredList){
         toDoAdapter = new ToDoAdapter(rootView.getContext(),filteredList, this);
         todoBySelected_date.setAdapter(toDoAdapter);
-    }
-    List<ToDo> getAllData(){
-        List<ToDo> allData = new ArrayList<>();
-        try {
-            allData = mvcModel.getAllToDos();
-        } catch (Exception ex) {
-            Toast.makeText(rootView.getContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
-        }
-        return allData;
     }
 
 }

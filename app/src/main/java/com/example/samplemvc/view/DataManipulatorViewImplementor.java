@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -42,7 +41,7 @@ public class DataManipulatorViewImplementor implements MVCDataManipulatorView {
     MVCDataManipulationController mvcController;
     private DatePickerDialog datePickerDialog;
     DatePickerDialog.OnDateSetListener dateSetListener;
-    private MVCModelImplementor mvcModel;
+    private final MVCModelImplementor mvcModel;
 
     EditText modifyTitle, modifyDetails, modifyDate, modifyTime;
     Button buttonRemoveToDo, buttonModifyToDo, buttonModifyDate, buttonModifyTime;
@@ -233,8 +232,6 @@ public class DataManipulatorViewImplementor implements MVCDataManipulatorView {
                 mvcController.onModifyButtonClicked(rootView.getContext(), toDoId, newTitle, newDetails, newDate, newTime, noticeStatus, setNotificationShowTime);
             }
         });
-
-
     }
 
     @Override
@@ -308,7 +305,6 @@ public class DataManipulatorViewImplementor implements MVCDataManipulatorView {
             modifyDetails.setText(toDo.getDetails());
             modifyDate.setText(toDo.getDate());
             modifyTime.setText(toDo.getTime());
-            Log.d(TAG + " selected Item", toDo.getId() + "," + toDo.getDate() + "," + toDo.getTime() + "," + toDo.getTitle() + "," + toDo.getNotificationStatus() + "," + toDo.getNotificationMinute());
         } catch (Exception ex) {
             Toast.makeText(rootView.getContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
         }

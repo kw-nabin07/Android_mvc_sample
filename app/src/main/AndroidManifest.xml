@@ -23,7 +23,7 @@
             android:name=".NoteActivity"
             android:exported="false" />
         <activity
-            android:name=".NotificationActivity"
+            android:name=".SettingActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
