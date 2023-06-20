@@ -1,7 +1,7 @@
 package com.example.samplemvc.controller;
 
 import com.example.samplemvc.model.MVCModelImplementor;
-import com.example.samplemvc.view.MainActivityViewImplementor;
+import com.example.samplemvc.todoView.MainActivityViewImplementor;
 
 
 public class MVCMainActivityController implements MVCController{

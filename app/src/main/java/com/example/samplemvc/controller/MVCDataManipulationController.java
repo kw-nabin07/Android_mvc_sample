@@ -6,7 +6,7 @@ import android.content.Context;
 import com.example.samplemvc.NotificationHelper;
 import com.example.samplemvc.model.MVCModelImplementor;
 import com.example.samplemvc.model.bean.ToDo;
-import com.example.samplemvc.view.DataManipulatorViewImplementor;
+import com.example.samplemvc.todoView.DataManipulatorViewImplementor;
 
 import java.util.List;
 

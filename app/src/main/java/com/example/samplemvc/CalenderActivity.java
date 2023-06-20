@@ -1,13 +1,13 @@
 package com.example.samplemvc;
 
-import static com.example.samplemvc.view.MVCViewFactory.getMVCView;
+import static com.example.samplemvc.todoView.MVCViewFactory.getMVCView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.samplemvc.view.MVCView;
-import com.example.samplemvc.view.MVCViewFactory;
+import com.example.samplemvc.todoView.MVCView;
+import com.example.samplemvc.todoView.MVCViewFactory;
 
 public class CalenderActivity extends AppCompatActivity {
     MVCView mvcView;

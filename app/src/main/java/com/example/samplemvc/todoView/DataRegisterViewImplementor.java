@@ -1,4 +1,4 @@
-package com.example.samplemvc.view;
+package com.example.samplemvc.todoView;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -170,22 +170,16 @@ public class DataRegisterViewImplementor implements MVCRegisterActivityView{
                 String strDate = text_date.getText().toString();
                 String date = strDate.replace(" ","");
                 String time = text_time.getText().toString();
-                if (todo.equals("") || info.equals("") || date.equals("") || time.equals("")){
-                    Toast.makeText(rootView.getContext(),"Need to set all info.", Toast.LENGTH_LONG).show();
-                }else{
-                    int notificationStatus;
-                    if (setNotificationShowTime == 0){
-                        setNotificationShowTime = 15;
-                    }
-                    if(notice_status){
-                        notificationStatus = 1;
-                    }else {
-                        notificationStatus = 0;
-                    }
-                    mvcDataRegisterController.onAddButtonClicked(rootView.getContext(),todo, info, date, time,notificationStatus,setNotificationShowTime);
+                int notificationStatus;
+                if (setNotificationShowTime == 0){
+                    setNotificationShowTime = 15;
                 }
-
-
+                if(notice_status){
+                    notificationStatus = 1;
+                }else {
+                    notificationStatus = 0;
+                }
+                mvcDataRegisterController.onAddButtonClicked(rootView.getContext(),todo, info, date, time,notificationStatus,setNotificationShowTime);
             }
         });
     }
@@ -203,7 +197,7 @@ public class DataRegisterViewImplementor implements MVCRegisterActivityView{
 
     @Override
     public void updateViewOnAdd() {
-        Toast.makeText(rootView.getContext(),"Successfully added.", Toast.LENGTH_LONG).show();
+        Toast.makeText(rootView.getContext(),"成功しました。", Toast.LENGTH_LONG).show();
         clearEditTexts();
     }
     private void clearEditTexts(){

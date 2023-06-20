@@ -1,4 +1,4 @@
-package com.example.samplemvc.view.adapters;
+package com.example.samplemvc.todoView.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;

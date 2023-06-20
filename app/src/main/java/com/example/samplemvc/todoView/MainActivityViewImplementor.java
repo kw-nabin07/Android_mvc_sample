@@ -1,4 +1,4 @@
-package com.example.samplemvc.view;
+package com.example.samplemvc.todoView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +25,7 @@ import com.example.samplemvc.controller.MVCMainActivityController;
 import com.example.samplemvc.model.MVCModelImplementor;
 import com.example.samplemvc.model.bean.ToDo;
 import com.example.samplemvc.model.db.ToDoListDBAdapter;
-import com.example.samplemvc.view.adapters.ToDoAdapter;
+import com.example.samplemvc.todoView.adapters.ToDoAdapter;
 
 import java.text.SimpleDateFormat;
 
