@@ -1,4 +1,4 @@
-package com.example.samplemvc.view;
+package com.example.samplemvc.todoView;
 
 import com.example.samplemvc.model.bean.ToDo;
 

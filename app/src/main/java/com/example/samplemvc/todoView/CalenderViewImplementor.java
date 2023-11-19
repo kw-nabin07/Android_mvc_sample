@@ -1,38 +1,30 @@
-package com.example.samplemvc.view;
+package com.example.samplemvc.todoView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.applandeo.materialcalendarview.CalendarDay;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
-import com.applandeo.materialcalendarview.listeners.OnCalendarPageChangeListener;
-import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.example.samplemvc.DataManipulationActivity;
 import com.example.samplemvc.R;
 import com.example.samplemvc.controller.MVCCalenderController;
 import com.example.samplemvc.model.MVCModelImplementor;
 import com.example.samplemvc.model.bean.ToDo;
 import com.example.samplemvc.model.db.ToDoListDBAdapter;
-import com.example.samplemvc.view.adapters.ToDoAdapter;
+import com.example.samplemvc.todoView.adapters.ToDoAdapter;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 

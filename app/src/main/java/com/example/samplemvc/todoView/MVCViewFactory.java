@@ -1,4 +1,4 @@
-package com.example.samplemvc.view;
+package com.example.samplemvc.todoView;
 
 import android.content.Context;
 import android.content.Intent;

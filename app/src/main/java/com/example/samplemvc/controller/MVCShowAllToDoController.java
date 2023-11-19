@@ -1,7 +1,7 @@
 package com.example.samplemvc.controller;
 
 import com.example.samplemvc.model.MVCModelImplementor;
-import com.example.samplemvc.view.AllToDoViewImplementor;
+import com.example.samplemvc.todoView.AllToDoViewImplementor;
 
 public class MVCShowAllToDoController implements MVCController {
     MVCModelImplementor mvcModel;

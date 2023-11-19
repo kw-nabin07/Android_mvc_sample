@@ -35,8 +35,7 @@ public class MVCModelImplementor implements MVCModel {
         }else{
             throw new Exception("Some thing went wrong!!!");
         }
-
-        return addSuccess;
+        return true;
     }
 
     @Override

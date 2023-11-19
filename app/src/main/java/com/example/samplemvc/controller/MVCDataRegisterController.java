@@ -5,7 +5,7 @@ import android.content.Context;
 import com.example.samplemvc.NotificationHelper;
 import com.example.samplemvc.model.MVCModelImplementor;
 import com.example.samplemvc.model.bean.ToDo;
-import com.example.samplemvc.view.DataRegisterViewImplementor;
+import com.example.samplemvc.todoView.DataRegisterViewImplementor;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class MVCDataRegisterController{
     }
     public void onAddButtonClicked(Context context,String toDoItem, String details, String date, String time,int notificationStatus,int notificationSetMinute) {
         try{
-            if(toDoItem.length() != 0 && details.length() != 0){
+            if(toDoItem.length() != 0 && details.length() != 0 && date.length() != 0 && time.length() != 0){
                 boolean success = mvcModel.addToDoItem(toDoItem, details, date, time,notificationStatus,notificationSetMinute);
                 if(success){
                     mvcView.updateViewOnAdd();

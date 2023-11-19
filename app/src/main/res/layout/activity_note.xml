@@ -8,16 +8,83 @@
     android:padding="10sp"
     tools:context=".NoteActivity">
 
-    <TextView
+    <com.example.samplemvc.noteView.DrawingView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="メモ帳"
-        android:textStyle="bold"
-        android:layout_marginTop="5sp"
-        android:textColor="@color/teal_700"
-        android:gravity="center"
-        android:textSize="26sp">
+        android:layout_height="200dp"
+        android:id="@+id/drawing_view"
+        android:layout_weight="1"
+        android:background="#80FFFFFF"   />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.example.samplemvc.noteView.StatusTextView
+                android:id="@+id/status_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minWidth="100dp"
+                android:minHeight="100dp"
+                android:text="Status text..."
+                android:textIsSelectable="true" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/download_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="downloadClick"
+                    android:textColor="@color/white"
+                    android:text="Download" />
+                <Button
+                    android:id="@+id/recognize_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="recognizeClick"
+                    android:textColor="@color/white"
+                    android:text="Recognize" />
+                <Button
+                    android:id="@+id/clear_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="clearClick"
+                    android:textColor="@color/white"
+                    android:text="Clear" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+            <Spinner
+                android:id="@+id/languages_spinner"
+                android:contentDescription="spinner"
+                android:layout_width="100dp"
+                android:minHeight="48dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3" />
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="deleteClick"
+                android:textSize="10dp"
+                android:textColor="@color/ic_launcher_background"
 
+                android:text="Delete" />
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>
