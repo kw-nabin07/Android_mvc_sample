@@ -187,7 +187,6 @@ public class NoteActivity extends AppCompatActivity
             if (modelIdentifier.getLanguageTag().endsWith(GESTURE_EXTENSION)) {
                 continue;
             }
-
             textModels.add(buildModelContainer(modelIdentifier));
         }
         languageAdapter.addAll(textModels.build());
