@@ -11,7 +11,7 @@
     <EditText
         android:id="@+id/conv_resultView"
         android:layout_width="match_parent"
-        android:layout_height="700dp"
+        android:layout_height="500dp"
         android:background="@drawable/border2"
         android:gravity="top|left"
         android:padding="5dp"
