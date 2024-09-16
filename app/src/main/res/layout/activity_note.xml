@@ -7,13 +7,31 @@
     android:orientation="vertical"
     android:padding="10sp"
     tools:context=".NoteActivity">
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Write Here"
+            android:layout_marginTop="7dp"
+             />
+        <ImageView
+            android:layout_width="60dip"
+            android:layout_height="30dp"
+            android:src="@drawable/download"
+            />
+    </LinearLayout>
     <com.example.samplemvc.noteView.DrawingView
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/drawing_view"
         android:layout_weight="1"
-        android:background="#80FFFFFF"   />
+        android:background="@drawable/border"   />
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -28,8 +46,24 @@
                 android:layout_height="wrap_content"
                 android:minWidth="100dp"
                 android:minHeight="100dp"
-                android:text="Status text..."
+                android:padding="5dp"
+                android:hint=".........."
+                android:background="@drawable/txtborder"
                 android:textIsSelectable="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="downloadClick"
+                android:textColor="@color/white"
+                android:layout_marginEnd="3dp"
+                android:text="Save" />
+        </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,6 +75,7 @@
                     android:layout_weight="1"
                     android:onClick="downloadClick"
                     android:textColor="@color/white"
+                    android:layout_marginEnd="3dp"
                     android:text="Download" />
                 <Button
                     android:id="@+id/recognize_button"
@@ -48,6 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="recognizeClick"
+                    android:layout_marginEnd="3dp"
                     android:textColor="@color/white"
                     android:text="Recognize" />
                 <Button
@@ -71,10 +107,10 @@
             <Spinner
                 android:id="@+id/languages_spinner"
                 android:contentDescription="spinner"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:minHeight="48dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3" />
+                android:layout_weight="2" />
             <Button
                 android:id="@+id/delete_button"
                 android:layout_width="0dp"
@@ -83,7 +119,6 @@
                 android:onClick="deleteClick"
                 android:textSize="10dp"
                 android:textColor="@color/ic_launcher_background"
-
                 android:text="Delete" />
         </LinearLayout>
     </FrameLayout>

@@ -40,4 +40,8 @@ dependencies {
     implementation 'com.applandeo:material-calendar-view:1.9.0-rc04'
 
     implementation 'com.google.mlkit:digital-ink-recognition:18.1.0'
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition-japanese:16.0.0'
+
+    implementation 'com.google.mlkit:text-recognition:16.0.0'
 }

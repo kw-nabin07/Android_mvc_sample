@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5sp"
+    tools:context=".SettingActivity">
+
+    <EditText
+        android:id="@+id/conv_resultView"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        android:background="@drawable/border2"
+        android:gravity="top|left"
+        android:padding="5dp"
+        android:text="Result......." />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border"
+        android:gravity="center|bottom"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/conv_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_clear_24" />
+
+        <ImageView
+            android:id="@+id/conv_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_camera_alt_24" />
+
+        <ImageView
+            android:id="@+id/conv_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_content_copy_24" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -161,7 +161,7 @@
                 android:layout_centerHorizontal="true"
                 android:background="@color/white"
                 android:contentDescription="@string/todoDescription"
-                android:src="@drawable/baseline_settings_24">
+                android:src="@drawable/baseline_save_as_24">
 
             </ImageButton>
 
@@ -170,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/notificationBtn"
                 android:layout_centerHorizontal="true"
-                android:text="@string/settings"
+                android:text="Conv."
                 android:textSize="16sp">
 
             </TextView>
