@@ -160,6 +160,7 @@ public class DataManipulatorViewImplementor implements MVCDataManipulatorView {
                     Log.d(TAG, " " + noticeTime);
                     break;
                 case 15:
+
                     radioButton_15min.setChecked(true);
                     Log.d(TAG, " " + noticeTime);
                     break;

@@ -24,3 +24,4 @@ public class MVCMainActivityController implements MVCController{
         mvcView.navigateToDataManipulationActivity(toDoId);
     }
 }
+

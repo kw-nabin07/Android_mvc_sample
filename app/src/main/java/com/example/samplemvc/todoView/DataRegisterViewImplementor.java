@@ -96,6 +96,7 @@ public class DataRegisterViewImplementor implements MVCRegisterActivityView{
                     setMinuteRadioGroup.setVisibility(View.VISIBLE);
 
                 }else {
+
                     setMinuteRadioGroup.setVisibility(View.INVISIBLE);
                 }
             }
